@@ -154,7 +154,5 @@ async fn main() {
                 .await
                 .unwrap();
         }
-
-        db.sync().await.unwrap();
     }
 }
