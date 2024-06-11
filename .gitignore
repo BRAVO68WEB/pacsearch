@@ -1,3 +1,4 @@
-db/*
-!db/.gitkeep
+pkgs/*
+!pkgs/.gitkeep
 target/
+*.db
