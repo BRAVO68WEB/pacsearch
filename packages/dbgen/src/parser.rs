@@ -375,6 +375,8 @@ mod date_serde {
         D: Deserializer<'de>,
     {
         let timestamp = i64::deserialize(deserializer)?;
-        Ok(Utc.timestamp(timestamp, 0))
+        Ok(Utc.timestamp_opt(timestamp, 0)
+            .single()
+            .ok_or_else(|| serde::de::Error::custom("Invalid timestamp"))?)
     }
 }
