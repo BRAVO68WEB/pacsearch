@@ -1,0 +1,23 @@
+name: "Project Test Run"
+
+on:
+  workflow_dispatch: 
+  push:
+  pull_request:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Installing Rust
+          uses: actions-rust-lang/setup-rust-toolchain@v1
+        - name: Download PKG Databases
+          run: ./scripts/get_dbs.sh
+        - name: Building with Cargo
+          uses: actions-rs/cargo@v1
+          with:
+            command: build
+            args: --release
+        - name: Run DBGen Parse
+          run: cargo run --release --bin dbgen
