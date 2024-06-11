@@ -13,7 +13,7 @@ jobs:
         - name: Installing Rust
           uses: actions-rust-lang/setup-rust-toolchain@v1
         - name: Download PKG Databases
-          run: ./scripts/get_dbs.sh
+          run: ./scripts/get_pkgs.sh
         - name: Building with Cargo
           uses: actions-rs/cargo@v1
           with:
@@ -21,3 +21,6 @@ jobs:
             args: --release
         - name: Run DBGen Parse
           run: cargo run --release --bin dbgen
+        - uses: actions/download-artifact@v4
+          with:
+            path: local.db
