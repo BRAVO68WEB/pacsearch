@@ -21,7 +21,6 @@ fn main() {
         let new_path = entry.path();
         let new_path_str = new_path.to_str().unwrap();
         let strip_path = &new_path_str[5..];
-        println!("strip_path: {:?}", strip_path);
         if strip_path == "starttime" || strip_path == "endtime" || strip_path == ".gitkeep" {
             continue;
         }
