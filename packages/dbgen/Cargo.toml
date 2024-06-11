@@ -1,0 +1,9 @@
+[package]
+name = "dbgen"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.19"
+serde = { version = "1.0.127", features = ["derive"] }
+archlinux-repo-parser = "0.1.6"
