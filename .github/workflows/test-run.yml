@@ -21,6 +21,8 @@ jobs:
             args: --release
         - name: Run DBGen Parse
           run: cargo run --release --bin dbgen
+        - name: Run AUR Parser
+          run: cargo run --release --bin aurparser
         - uses: actions/download-artifact@v4
           with:
-            path: local.db
+            name: local.db
