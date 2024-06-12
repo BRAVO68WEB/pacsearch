@@ -32,6 +32,22 @@ echo "Downloading aur"
 curl https://aur.archlinux.org/packages-meta-ext-v1.json.gz --output pkgs/aur.json.gz >/dev/null 2>&1
 echo "Downloaded aur"
 
+echo "Downloading visual-studio-code-insiders"
+curl https://nihaals.github.io/visual-studio-code-insiders-arch/visual-studio-code-insiders.db.tar.gz --output pkgs/visual-studio-code-insiders.tar.gz >/dev/null 2>&1
+echo "Downloaded visual-studio-code-insiders"
+
+echo "Downloading build.kilabit.info"
+curl https://build.kilabit.info/aur/build.kilabit.info.db.tar.gz --output pkgs/build.kilabit.info.tar.gz >/dev/null 2>&1
+echo "Downloaded build.kilabit.info"
+
+echo "Downloading dx37essentials"
+curl https://dx37.gitlab.io/dx37essentials/x86_64/dx37essentials.db.tar.zst --output pkgs/dx37essentials.tar.zst >/dev/null 2>&1
+echo "Downloaded dx37essentials"
+
+echo "Downloading bioarchlinux"
+curl https://repo.bioarchlinux.org/x86_64/bioarchlinux.db.tar.gz --output pkgs/bioarchlinux.tar.gz >/dev/null 2>&1
+echo "Downloaded bioarchlinux"
+
 echo "Completed downloading databases"
 
 echo "Creating directories"
@@ -42,6 +58,10 @@ mkdir -p pkgs/chaotic-aur
 mkdir -p pkgs/blackarch
 mkdir -p pkgs/mingw64
 mkdir -p db
+mkdir -p pkgs/visual-studio-code-insiders
+mkdir -p pkgs/build.kilabit.info
+mkdir -p pkgs/dx37essentials
+mkdir -p pkgs/bioarchlinux
 echo "Directories created"
 
 echo "Extracting Databases"
@@ -76,6 +96,22 @@ echo "Extracting aur"
 gunzip -d pkgs/aur.json.gz
 echo "Extracted aur"
 
+echo "Extracting visual-studio-code-insiders"
+tar -xzf pkgs/visual-studio-code-insiders.tar.gz -C pkgs/visual-studio-code-insiders >/dev/null 2>&1
+echo "Extracted visual-studio-code-insiders"
+
+echo "Extracting build.kilabit.info"
+tar -xzf pkgs/build.kilabit.info.tar.gz -C pkgs/build.kilabit.info >/dev/null 2>&1
+echo "Extracted build.kilabit.info"
+
+echo "Extracting dx37essentials"
+tar -xzf pkgs/dx37essentials.tar.zst -C pkgs/dx37essentials >/dev/null 2>&1
+echo "Extracted dx37essentials"
+
+echo "Extracting bioarchlinux"
+tar -xzf pkgs/bioarchlinux.tar.gz -C pkgs/bioarchlinux >/dev/null 2>&1
+echo "Extracted bioarchlinux"
+
 echo "Completed extracting databases"
 
 echo "Removing tar files"
@@ -87,6 +123,11 @@ rm pkgs/chaotic-aur.files
 rm pkgs/blackarch.db.tar.gz
 rm pkgs/mingw64.zst
 rm pkgs/mingw64.files
+rm pkgs/aur.json
+rm pkgs/visual-studio-code-insiders.tar.gz
+rm pkgs/build.kilabit.info.tar.gz
+rm pkgs/dx37essentials.tar.zst
+rm pkgs/bioarchlinux.tar.gz
 echo "Removed tar files"
 
 echo "Remove unnecessary files 'files'"
