@@ -1,5 +1,7 @@
 [workspace]
 members = [ 
     "packages/aurparser",
-    "packages/dbgen", "packages/repoparser",
+    "packages/dbgen", 
+    "packages/repoparser",
+    "packages/archlinux-repo-parser",
 ]

@@ -18,45 +18,6 @@ async fn main() {
     let db = db_result.expect("Failed to build the database");
     let client = db.connect().expect("Failed to connect to the database");
 
-    client
-        .execute(
-            "CREATE TABLE repos (
-                name TEXT PRIMARY KEY
-            )",
-            ()
-        )
-        .await
-        .unwrap();
-    client
-        .execute(
-            "CREATE TABLE packages (
-                name TEXT NOT NULL,
-                file_name TEXT NOT NULL,
-                base TEXT,
-                version TEXT NOT NULL,
-                description TEXT,
-                groups TEXT,
-                compressed_size INTEGER,
-                installed_size INTEGER,
-                md5_sum TEXT,
-                sha256_sum TEXT,
-                pgp_signature TEXT,
-                home_url TEXT,
-                license TEXT,
-                arch TEXT,
-                build_date DATE,
-                packager TEXT,
-                replaces TEXT,
-                conflicts TEXT,
-                provides TEXT,
-                repo TEXT NOT NULL,
-                FOREIGN KEY(repo) REFERENCES repos(name)
-            )",
-            ()
-        )
-        .await
-        .unwrap();
-
     let root_path = Path::new("./pkgs");
     let entries = fs::read_dir(root_path).unwrap();
     let mut pkg_databases: Vec<Database> = Vec::new();
