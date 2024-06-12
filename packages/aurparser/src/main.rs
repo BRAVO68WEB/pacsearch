@@ -102,8 +102,6 @@ async fn main() {
             )
             .await
             .unwrap();
-
-            println!("Inserted package: {}", name);
     }
 
     println!("Elapsed time: {:?}", start.elapsed());
