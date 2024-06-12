@@ -16,6 +16,8 @@ jobs:
           uses: actions-rust-lang/setup-rust-toolchain@v1
         - name: Download PKG Databases
           run: ./scripts/get_pkgs.sh
+        - name: Init Local Database
+          run: ./scripts/init_db.sh
         - name: Building with Cargo
           uses: actions-rs/cargo@v1
           with:
