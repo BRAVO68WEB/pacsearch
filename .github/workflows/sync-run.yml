@@ -1,4 +1,4 @@
-name: "Project Test Run"
+name: "Project Sync Run"
 
 on:
   workflow_dispatch: 
