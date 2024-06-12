@@ -57,7 +57,6 @@ mkdir -p pkgs/multilib
 mkdir -p pkgs/chaotic-aur
 mkdir -p pkgs/blackarch
 mkdir -p pkgs/mingw64
-mkdir -p db
 mkdir -p pkgs/visual-studio-code-insiders
 mkdir -p pkgs/build.kilabit.info
 mkdir -p pkgs/dx37essentials
