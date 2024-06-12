@@ -123,7 +123,7 @@ rm pkgs/chaotic-aur.files
 rm pkgs/blackarch.db.tar.gz
 rm pkgs/mingw64.zst
 rm pkgs/mingw64.files
-rm pkgs/aur.json
+# rm pkgs/aur.json
 rm pkgs/visual-studio-code-insiders.tar.gz
 rm pkgs/build.kilabit.info.tar.gz
 rm pkgs/dx37essentials.tar.zst
