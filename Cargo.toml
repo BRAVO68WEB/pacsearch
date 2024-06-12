@@ -1,4 +1,5 @@
 [workspace]
-members = [
-    "packages/dbgen",
+members = [ 
+    "packages/aurparser",
+    "packages/dbgen", "packages/repoparser",
 ]
