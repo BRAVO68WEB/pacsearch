@@ -2,7 +2,11 @@ mod parser;
 
 use std::path::Path;
 use std::fs;
-use libsql::Builder;
+
+use postgres::Client;
+use openssl::ssl::{SslConnector, SslMethod};
+use postgres_openssl::MakeTlsConnector;
+use std::error;
 
 use serde::{Deserialize, Serialize};
 
@@ -12,12 +16,11 @@ pub struct Database {
     pub packages: Vec<parser::Package>,
 }
 
-#[tokio::main]
-async fn main() {
-    let db_result = Builder::new_local("db/local.db").build().await;
-    let db = db_result.expect("Failed to build the database");
-    let client = db.connect().expect("Failed to connect to the database");
+fn main() {
+    let builder = SslConnector::builder(SslMethod::tls());
+    let connector = MakeTlsConnector::new(builder.unwrap().build());
 
+    let mut client = Client::connect("DB_URL", connector).unwrap();
     // Create a Table with the following schema
     // 'packages' - follow parser::Package
     // 'databases' - follow Database
@@ -29,10 +32,10 @@ async fn main() {
             "CREATE TABLE repos (
                 name TEXT PRIMARY KEY
             )",
-            ()
+            &[]
         )
-        .await
         .unwrap();
+
     client
         .execute(
             "CREATE TABLE packages (
@@ -42,15 +45,15 @@ async fn main() {
                 version TEXT NOT NULL,
                 description TEXT,
                 groups TEXT,
-                compressed_size INTEGER,
-                installed_size INTEGER,
+                compressed_size TEXT,
+                installed_size TEXT,
                 md5_sum TEXT,
                 sha256_sum TEXT,
                 pgp_signature TEXT,
                 home_url TEXT,
                 license TEXT,
                 arch TEXT,
-                build_date DATE,
+                build_date TEXT,
                 packager TEXT,
                 replaces TEXT,
                 conflicts TEXT,
@@ -58,9 +61,8 @@ async fn main() {
                 repo TEXT NOT NULL,
                 FOREIGN KEY(repo) REFERENCES repos(name)
             )",
-            ()
+            &[]
         )
-        .await
         .unwrap();
 
     let root_path = Path::new("./pkgs");
@@ -120,38 +122,36 @@ async fn main() {
         client
             .execute(
                 "INSERT INTO repos (name) VALUES ($1)",
-                &[database.name.clone()]
+                &[&database.name.clone()]
             )
-            .await
             .unwrap();
         for package in database.packages {
             client
                 .execute(
                     "INSERT INTO packages (name, file_name, base, version, description, groups, compressed_size, installed_size, md5_sum, sha256_sum, pgp_signature, home_url, license, arch, build_date, packager, replaces, conflicts, provides, repo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)",
                     &[
-                        package.name,
-                        package.file_name,
-                        package.base.unwrap_or("NULL".into()),
-                        package.version,
-                        package.description.unwrap_or("NULL".into()),
-                        package.groups.map(|x| x.join(",")).unwrap_or("NULL".into()),
-                        package.compressed_size.unwrap_or(0).to_string(),
-                        package.installed_size.unwrap_or(0).to_string(),
-                        package.md5_sum.unwrap_or("NULL".into()),
-                        package.sha256_sum.unwrap_or("NULL".into()),
-                        package.pgp_signature.unwrap_or("NULL".into()),
-                        package.home_url.unwrap_or("NULL".into()),
-                        package.license.map(|x| x.join(",")).unwrap_or("NULL".into()),
-                        package.architecture,
-                        package.build_date.to_string(),
-                        package.packager,
-                        package.replaces.map(|x| x.join(",")).unwrap_or("NULL".into()),
-                        package.conflicts.map(|x| x.join(",")).unwrap_or("NULL".into()),
-                        package.provides.map(|x| x.join(",")).unwrap_or("NULL".into()),
-                        database.name.clone(),
+                        &package.name,
+                        &package.file_name,
+                        &package.base.unwrap_or("NULL".into()),
+                        &package.version,
+                        &package.description.unwrap_or("NULL".into()),
+                        &package.groups.map(|x| x.join(",")).unwrap_or("NULL".into()),
+                        &package.compressed_size.unwrap_or(0).to_string(),
+                        &package.installed_size.unwrap_or(0).to_string(),
+                        &package.md5_sum.unwrap_or("NULL".into()),
+                        &package.sha256_sum.unwrap_or("NULL".into()),
+                        &package.pgp_signature.unwrap_or("NULL".into()),
+                        &package.home_url.unwrap_or("NULL".into()),
+                        &package.license.map(|x| x.join(",")).unwrap_or("NULL".into()),
+                        &package.architecture,
+                        &package.build_date.to_string(),
+                        &package.packager,
+                        &package.replaces.map(|x| x.join(",")).unwrap_or("NULL".into()),
+                        &package.conflicts.map(|x| x.join(",")).unwrap_or("NULL".into()),
+                        &package.provides.map(|x| x.join(",")).unwrap_or("NULL".into()),
+                        &database.name.clone(),
                     ]
                 )
-                .await
                 .unwrap();
         }
     }
