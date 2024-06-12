@@ -37,6 +37,7 @@ mkdir -p pkgs/multilib
 mkdir -p pkgs/chaotic-aur
 mkdir -p pkgs/blackarch
 mkdir -p pkgs/mingw64
+mkdir -p db
 echo "Directories created"
 
 echo "Extracting Databases"

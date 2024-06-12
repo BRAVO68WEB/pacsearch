@@ -14,7 +14,7 @@ pub struct Database {
 
 #[tokio::main]
 async fn main() {
-    let db_result = Builder::new_local("local.db").build().await;
+    let db_result = Builder::new_local("db/local.db").build().await;
     let db = db_result.expect("Failed to build the database");
     let client = db.connect().expect("Failed to connect to the database");
 
