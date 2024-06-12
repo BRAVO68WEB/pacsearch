@@ -28,6 +28,10 @@ echo "Downloading mingw64"
 curl https://repo.msys2.org/mingw/x86_64/mingw64.files --output pkgs/mingw64.files >/dev/null 2>&1
 echo "Downloaded mingw64"
 
+echo "Downloading aur"
+curl https://aur.archlinux.org/packages-meta-ext-v1.json.gz --output pkgs/aur.json.gz >/dev/null 2>&1
+echo "Downloaded aur"
+
 echo "Completed downloading databases"
 
 echo "Creating directories"
@@ -68,6 +72,10 @@ cp pkgs/mingw64.files pkgs/mingw64.zst
 tar --zstd -xvf pkgs/mingw64.zst -C pkgs/mingw64 >/dev/null 2>&1
 echo "Extracted mingw64"
 
+echo "Extracting aur"
+gunzip -d pkgs/aur.json.gz
+echo "Extracted aur"
+
 echo "Completed extracting databases"
 
 echo "Removing tar files"
@@ -81,11 +89,7 @@ rm pkgs/mingw64.zst
 rm pkgs/mingw64.files
 echo "Removed tar files"
 
-# Remove unnecessary files 'files'
+echo "Remove unnecessary files 'files'"
 rm pkgs/*/*/files
 
 echo $(date +"%s") > pkgs/endtime
-
-# aur
-# https://aur.archlinux.org/rpc/v5/info/$arg
-# https://aur.archlinux.org/rpc/v5/suggest/$arg
