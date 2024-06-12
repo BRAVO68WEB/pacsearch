@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 serde = { version = "1.0.127", features = ["derive"] }
-archlinux-repo-parser = "0.1.6"
+archlinux-repo-parser = { path = "../archlinux-repo-parser" }
 libsql = "0.4.0"
 tokio = { version = "1.38.0", features = ["full"] }
 repoparser = { path = "../repoparser" }

@@ -2,10 +2,6 @@ name: "Project Test Run"
 
 on:
   workflow_dispatch: 
-  push:
-    branches:
-      - main
-  pull_request:
 
 jobs:
     build:
@@ -14,6 +10,9 @@ jobs:
         - uses: actions/checkout@v2
         - name: Installing Rust
           uses: actions-rust-lang/setup-rust-toolchain@v1
+        - uses: ankane/setup-postgres@v1
+          with:
+            postgres-version: 15
         - name: Download PKG Databases
           run: ./scripts/get_pkgs.sh
         - name: Init Local Database
@@ -27,6 +26,11 @@ jobs:
           run: cargo run --release --bin dbgen
         - name: Run AUR Parser
           run: cargo run --release --bin aurparser
+        - name: Run Additional Scripts
+          run: |
+            curl https://github.com/Roxedus/Pgloader-bin/releases/download/ec8f41d/pgloader -L -o pgloader
+            chmod +x pgloader
+            ./pgloader sqlite://db/local.db ${{ secrets.PG_CONNECTION_STRING }}
         - uses: actions/upload-artifact@v4
           with:
             name: localdbs
