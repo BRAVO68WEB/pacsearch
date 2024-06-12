@@ -1,4 +1,4 @@
-mod parser;
+use repoparser;
 
 use std::path::Path;
 use std::fs;
@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Database {
     pub name: String,
-    pub packages: Vec<parser::Package>,
+    pub packages: Vec<repoparser::Package>,
 }
 
 #[tokio::main]
@@ -17,12 +17,6 @@ async fn main() {
     let db_result = Builder::new_local("db/local.db").build().await;
     let db = db_result.expect("Failed to build the database");
     let client = db.connect().expect("Failed to connect to the database");
-
-    // Create a Table with the following schema
-    // 'packages' - follow parser::Package
-    // 'databases' - follow Database
-
-    // Create a database
 
     client
         .execute(
@@ -72,7 +66,7 @@ async fn main() {
         let new_path = entry.path();
         let new_path_str = new_path.to_str().unwrap();
         let strip_path = &new_path_str[7..];
-        if strip_path == "starttime" || strip_path == "endtime" || strip_path == ".gitkeep" {
+        if strip_path == "starttime" || strip_path == "endtime" || strip_path == ".gitkeep" || strip_path == "aur.json" {
             continue;
         }
         let database = Database {
@@ -88,7 +82,7 @@ async fn main() {
         let database_path = root_path.join(database_name.name.clone());
         let entries = fs::read_dir(database_path.clone()).unwrap();
         let mut packages_names: Vec<String> = Vec::new();
-        let mut packages: Vec<parser::Package> = Vec::new();
+        let mut packages: Vec<repoparser::Package> = Vec::new();
         for entry in entries {
             let entry = entry.unwrap();
             let new_path = entry.path();
@@ -102,7 +96,7 @@ async fn main() {
             let desc_path = package_path.join("desc");
             let desc = fs::read_to_string(desc_path).unwrap();
             let package = archlinux_repo_parser::to_string(&desc).unwrap();
-            let package: parser::Package = archlinux_repo_parser::from_str(&package).unwrap();
+            let package: repoparser::Package = archlinux_repo_parser::from_str(&package).unwrap();
             packages.push(package);
         }
     
