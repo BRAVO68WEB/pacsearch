@@ -26,11 +26,17 @@ jobs:
           run: cargo run --release --bin dbgen
         - name: Run AUR Parser
           run: cargo run --release --bin aurparser
+        - name: DB Clean Up
+          run: |
+            psql -d ${{ secrets.PG_CONNECTION_STRING }} -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
         - name: Run Additional Scripts
           run: |
             curl https://github.com/Roxedus/Pgloader-bin/releases/download/ec8f41d/pgloader -L -o pgloader
             chmod +x pgloader
-            ./pgloader sqlite://db/local.db ${{ secrets.PG_CONNECTION_STRING }}
+            ./pgloader sqlite://db/local.db ${{ secrets.PG_CONNECTION_STRING }} >/dev/null 2>&1
+        - name: Sync Hasura Metadata
+          run: |
+            ./scripts/hasura_sync.sh ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}      
         - uses: actions/upload-artifact@v4
           with:
             name: localdbs
