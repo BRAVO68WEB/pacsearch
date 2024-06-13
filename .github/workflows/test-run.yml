@@ -27,9 +27,3 @@ jobs:
           run: cargo run --release --bin dbgen
         - name: Run AUR Parser
           run: cargo run --release --bin aurparser
-        - uses: actions/upload-artifact@v4
-          with:
-            name: localdbs
-            path: |
-              **/local.db
-              db/local.db

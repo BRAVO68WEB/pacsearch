@@ -1,7 +1,15 @@
 name: "Project Sync Run"
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
+    inputs:
+      sync:
+        description: 'Dump DB'
+        required: true
+        default: false
+        type: boolean
+  schedule:
+    - cron: '0 */12 * * *'
 
 jobs:
     build:
@@ -38,6 +46,8 @@ jobs:
           run: |
             ./scripts/hasura_sync.sh ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}      
         - uses: actions/upload-artifact@v4
+          if: ${{ github.event.inputs.sync }} == 'true'
+          name: Upload DB
           with:
             name: localdbs
             path: |
