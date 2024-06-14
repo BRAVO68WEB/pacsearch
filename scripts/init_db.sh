@@ -28,7 +28,7 @@ CREATE TABLE packages (
     home_url TEXT,
     license TEXT,
     arch TEXT,
-    build_date DATE,
+    build_date TEXT,
     packager TEXT,
     replaces TEXT,
     conflicts TEXT,
