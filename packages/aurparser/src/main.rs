@@ -21,8 +21,6 @@ async fn main() {
     
     let mut data_source = load_from_file("pkgs/aur.json");
 
-    println!("Loaded {} packages", data_source.as_array_mut().unwrap().len());
-
     client
         .execute(
             "INSERT INTO repos (name) VALUES ($1)",

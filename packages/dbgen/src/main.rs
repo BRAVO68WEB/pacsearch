@@ -2,8 +2,9 @@ use repoparser;
 
 use std::path::Path;
 use std::fs;
-use libsql::Builder;
+use std::time::Instant;
 
+use libsql::Builder;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -14,6 +15,8 @@ pub struct Database {
 
 #[tokio::main]
 async fn main() {
+    let start = Instant::now();
+
     let db_result = Builder::new_local("db/local.db").build().await;
     let db = db_result.expect("Failed to build the database");
     let client = db.connect().expect("Failed to connect to the database");
@@ -110,4 +113,6 @@ async fn main() {
                 .unwrap();
         }
     }
+
+    println!("Elapsed time: {:?}", start.elapsed());
 }

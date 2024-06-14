@@ -41,3 +41,5 @@ EOF
 echo "Completed initializing local databases"
 
 echo $(date +"%s") > db/endtime
+
+echo "Total time taken: $(($(cat db/endtime) - $(cat db/starttime))) seconds"
