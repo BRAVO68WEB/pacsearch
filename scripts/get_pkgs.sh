@@ -48,6 +48,26 @@ echo "Downloading bioarchlinux"
 curl https://repo.bioarchlinux.org/x86_64/bioarchlinux.db.tar.gz --output pkgs/bioarchlinux.tar.gz >/dev/null 2>&1
 echo "Downloaded bioarchlinux"
 
+echo "Downloading arch4edu"
+curl https://mirrors.tuna.tsinghua.edu.cn/arch4edu/any/arch4edu.db.tar.gz --output pkgs/arch4edu.db.tar.gz >/dev/null 2>&1
+echo "Downloaded arch4edu"
+
+echo "Downloading archlinuxcn"
+curl https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/any/archlinuxcn.db.tar.gz --output pkgs/archlinuxcn.db.tar.gz >/dev/null 2>&1
+echo "Downloaded archlinuxcn"
+
+echo "Downloading ownstuff"
+curl https://martchus.dyn.f3l.de/repo/arch/ownstuff/os/any/ownstuff.db.tar.xz --output pkgs/ownstuff.db.tar.xz >/dev/null 2>&1
+echo "Downloaded ownstuff"
+
+echo "Downloading seiichiro"
+curl https://www.seiichiro0185.org/repo/x86_64/seiichiro.db.tar.zst --output pkgs/seiichiro.db.tar.zst >/dev/null 2>&1
+echo "Downloaded seiichiro"
+
+echo "Downloading quarry"
+curl https://pkgbuild.com/~anatolik/quarry/x86_64/quarry.db.tar.xz --output pkgs/quarry.db.tar.xz >/dev/null 2>&1
+echo "Downloaded quarry"
+
 echo "Completed downloading databases"
 
 echo "Creating directories"
@@ -61,6 +81,11 @@ mkdir -p pkgs/visual-studio-code-insiders
 mkdir -p pkgs/build.kilabit.info
 mkdir -p pkgs/dx37essentials
 mkdir -p pkgs/bioarchlinux
+mkdir -p pkgs/arch4edu
+mkdir -p pkgs/archlinuxcn
+mkdir -p pkgs/ownstuff
+mkdir -p pkgs/seiichiro
+mkdir -p pkgs/quarry
 echo "Directories created"
 
 echo "Extracting Databases"
@@ -111,6 +136,26 @@ echo "Extracting bioarchlinux"
 tar -xzf pkgs/bioarchlinux.tar.gz -C pkgs/bioarchlinux >/dev/null 2>&1
 echo "Extracted bioarchlinux"
 
+echo "Extracting arch4edu"
+tar -xzf pkgs/arch4edu.db.tar.gz -C pkgs/arch4edu >/dev/null 2>&1
+echo "Extracted arch4edu"
+
+echo "Extracting archlinuxcn"
+tar -xzf pkgs/archlinuxcn.db.tar.gz -C pkgs/archlinuxcn >/dev/null 2>&1
+echo "Extracted archlinuxcn"
+
+echo "Extracting ownstuff"
+tar -xvf pkgs/ownstuff.db.tar.xz -C pkgs/ownstuff >/dev/null 2>&1
+echo "Extracted ownstuff"
+
+echo "Extracting seiichiro"
+tar --zstd -xvf pkgs/seiichiro.db.tar.zst -C pkgs/seiichiro >/dev/null 2>&1
+echo "Extracted seiichiro"
+
+echo "Extracting quarry"
+tar -xvf pkgs/quarry.db.tar.xz -C pkgs/quarry >/dev/null 2>&1
+echo "Extracted quarry"
+
 echo "Completed extracting databases"
 
 echo "Removing tar files"
@@ -127,6 +172,11 @@ rm pkgs/visual-studio-code-insiders.tar.gz
 rm pkgs/build.kilabit.info.tar.gz
 rm pkgs/dx37essentials.tar.zst
 rm pkgs/bioarchlinux.tar.gz
+rm pkgs/arch4edu.db.tar.gz
+rm pkgs/archlinuxcn.db.tar.gz
+rm pkgs/ownstuff.db.tar.xz
+rm pkgs/seiichiro.db.tar.zst
+rm pkgs/quarry.db.tar.xz
 echo "Removed tar files"
 
 echo "Remove unnecessary files 'files'"
