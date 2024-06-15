@@ -1,0 +1,22 @@
+{
+  "name": "pacsearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@bravo68web/prettier-config": "^1.2.4",
+    "graphqurl": "^1.0.3",
+    "prettier": "^3.3.2",
+    "turbo": "^2.0.3"
+  },
+  "prettier": "@bravo68web/prettier-config",
+  "packageManager": "pnpm@9.1.1"
+}

@@ -183,3 +183,7 @@ echo "Remove unnecessary files 'files'"
 rm pkgs/*/*/files
 
 echo $(date +"%s") > pkgs/endtime
+
+echo "Completed getting the list of databases"
+
+echo "Total time taken: $(($(cat pkgs/endtime) - $(cat pkgs/starttime))) seconds"
