@@ -1,62 +1,31 @@
-import { query } from "@/helpers/ApolloClient"
-import { gql } from "@apollo/client";
-
-const getDataRepo = async () => {
-  const { data } = await query({
-    query: gql`
-      query {
-        repos {
-          name
-        }
-      }
-    `
-  })
-
-  return data as { repos: [{ name: string }]}
-}
-
-const getRepoPackages = async (repo: string) => {
-  const { data } = await query({
-    query: gql`
-      query {
-        packages(repo: "${repo}") {
-          name
-          version
-        }
-      }
-    `
-  })
-
-  return data as { packages: [{ name: string, version: string }]}
-}
+import NameContext from "@/components/NameContext";
+import PackageList from "@/components/PackageList";
+import Pagination from "@/components/Pagination";
+import RepoList from "@/components/RepoList";
+import SearchBar from "@/components/SearchBar";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div className="flex gap-4 items-center flex-row sm:flex-row">
-          <div>
-            {
-              getDataRepo().then(data => (
-                <div className="flex items-center flex-col">
-                  {
-                    data.repos.map(repo => (
-                      <div key={repo.name}>
-                        <span>{repo.name}</span>
-                      </div>
-                    ))
-                  }
+    return (
+        <NameContext>
+            <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
+                <div className="flex gap-16 flex-row sm:flex-row">
+                    <div className="flex border-2 border-sky-500 flex-col items-center justify-items-center">
+                        <h1 className="items-center justify-items-center text-2xl pt-2">
+                            Repo List
+                        </h1>
+                        <RepoList />
+                    </div>
+                    <div className="flex gap-4 flex-col border-sky-500 border-2">
+                        <div 
+                            className="flex justify-between items-center p-2"
+                        >
+                          <SearchBar />
+                          <Pagination />
+                        </div>
+                        <PackageList />
+                    </div>
                 </div>
-              ))
-            }
-          </div>
-          <div>
-            {
-              
-            }
-          </div>
-        </div>
-      </main>
-    </div>
-  );
+            </div>
+        </NameContext>
+    );
 }

@@ -19,3 +19,13 @@ body {
   background: var(--background);
   font-synthesis: none;
 }
+
+.react-dropdown-select-item  {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+.react-dropdown-select-item:hover {
+  color: var(--background);
+  background: var(--foreground);
+}
