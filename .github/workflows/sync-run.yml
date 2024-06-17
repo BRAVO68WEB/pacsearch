@@ -34,6 +34,8 @@ jobs:
           run: cargo run --release --bin dbgen
         - name: Run AUR Parser
           run: cargo run --release --bin aurparser
+        - name: Index Local Database
+          run: ./scripts/index_db.sh
         - name: DB Clean Up
           run: |
             psql -d ${{ secrets.PG_CONNECTION_STRING }} -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
