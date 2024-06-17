@@ -387,6 +387,7 @@ dependencies = [
  "libsql",
  "repoparser",
  "serde",
+ "serde_json",
  "tokio",
 ]
 
