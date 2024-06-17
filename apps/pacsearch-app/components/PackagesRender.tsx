@@ -6,12 +6,21 @@ import {
     getCoreRowModel, 
     useReactTable 
 } from '@tanstack/react-table';
+import { IRepoPkgsData, IMiniPkgInfoData } from '@/libs/get_packages';
+import Link from 'next/link';
 
-function PackageRender({ data }: Readonly<{ data: { packages: [{ name: string, version: string, description: string, repo: string }] } }>) {
-    const columnHelper = createColumnHelper<{name: string, version: string, description: string, repo: string}>()
+function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
+    const columnHelper = createColumnHelper<IMiniPkgInfoData>()
     const columns = [
         columnHelper.accessor('name', {
-            cell: info => info.getValue(),
+            cell: info => {
+                return (
+                    <Link href={`/${info.row.original.repo}/${info.row.original.name}`}>
+                        {info.getValue()}
+                    </Link>
+                )
+            
+            },
             footer: info => info.column.id,
         }),
         columnHelper.accessor('version', {

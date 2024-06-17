@@ -34,6 +34,7 @@ CREATE TABLE packages (
     conflicts TEXT,
     provides TEXT,
     repo TEXT NOT NULL,
+    download_url TEXT NOT NULL,
     FOREIGN KEY(repo) REFERENCES repos(name)
 );
 EOF

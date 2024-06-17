@@ -3,8 +3,15 @@
 import { query } from "@/helpers/ApolloClient"
 import { gql } from "@apollo/client"
 
-interface IData {
-    packages: [{ name: string; version: string; description: string; repo: string }];
+export interface IMiniPkgInfoData {
+    name: string,
+    version: string,
+    description: string,
+    repo: string
+}
+
+export interface IRepoPkgsData {
+    packages: IMiniPkgInfoData[],
     packages_aggregate: {
         aggregate: {
             count: number
@@ -19,7 +26,7 @@ const getRepoPackages = async (repo: string | null, pkgName: string | null, opti
     if (!repo) {
         if(pkgName) {
             const { data } : {
-                data: IData
+                data: IRepoPkgsData
             }= await query({
                 query: gql`
                   query getPksByRepoName(
@@ -61,7 +68,7 @@ const getRepoPackages = async (repo: string | null, pkgName: string | null, opti
         }
         else {
             const { data } : {
-                data: IData
+                data: IRepoPkgsData
             } = await query({
                 query: gql`
                   query getPksByRepoName(
@@ -98,7 +105,7 @@ const getRepoPackages = async (repo: string | null, pkgName: string | null, opti
     }
     else if(pkgName) {
         const { data } : {
-            data: IData
+            data: IRepoPkgsData
         } = await query({
             query: gql`
                 query getPksByRepoName(
@@ -143,7 +150,7 @@ const getRepoPackages = async (repo: string | null, pkgName: string | null, opti
     }
     else {
         const { data } : {
-            data: IData
+            data: IRepoPkgsData
         } = await query({
         query: gql`
             query getPksByRepoName(

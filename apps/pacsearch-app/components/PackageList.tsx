@@ -2,15 +2,11 @@
 import { useEffect, useState } from "react";
 
 import PackageRender from "./PackagesRender";
-import getRepoPackages from "@/libs/get_packages";
+import getRepoPackages, { IRepoPkgsData } from "@/libs/get_packages";
 import { useRepoName } from "./NameContext";
 
-interface IData {
-    packages: [{ name: string; version: string; description: string; repo: string }];
-}
-
 function PackageList() {
-    const [data, setData] = useState<IData | null>(null);
+    const [data, setData] = useState<IRepoPkgsData | null>(null);
     const { name: repo_name, searchPkgName, pageNumber, perPage, setTotalPackages } = useRepoName();
 
     useEffect(() => {

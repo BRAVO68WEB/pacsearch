@@ -33,7 +33,7 @@ async fn main() {
         let package = package.as_object_mut().unwrap();
         let name = package.get("Name").unwrap().as_str().unwrap();
         let version = package.get("Version").unwrap().as_str().unwrap();
-        let file_name = name.to_string() + "-" + version + ".tar.gz";
+        let file_name = name.to_string() + ".tar.gz";
         let base = package.get("PackageBase").unwrap().as_str().unwrap();
         let description = package.get("Description").unwrap_or(&Value::Null).as_str().unwrap_or("NULL");
         let home_url = package.get("URL").unwrap_or(&Value::Null).as_str().unwrap_or("NULL");
@@ -50,6 +50,7 @@ async fn main() {
         let replaces = "NULL";
         let conflicts = "NULL";
         let provides = "NULL";
+        let download_url = "https://aur.archlinux.org".to_string() + package.get("URLPath").unwrap().as_str().unwrap();
 
         client
             .execute(
@@ -73,8 +74,9 @@ async fn main() {
                     replaces,
                     conflicts,
                     provides,
+                    download_url,
                     repo
-                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)",
+                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)",
                 &[
                     name,
                     &file_name,
@@ -95,6 +97,7 @@ async fn main() {
                     replaces,
                     conflicts,
                     provides,
+                    &download_url,
                     "aur"
                 ]
             )

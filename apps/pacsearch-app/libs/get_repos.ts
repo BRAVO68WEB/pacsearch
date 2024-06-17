@@ -1,8 +1,18 @@
 import { query } from "@/helpers/ApolloClient"
 import { gql } from "@apollo/client"
 
+export interface IRepoData {
+    name: string
+}
+
+export interface IRepoListData {
+    repos: IRepoData[]
+}
+
 const getDataRepo = async () => {
-    const { data } = await query({
+    const { data } : {
+        data: IRepoListData
+    } = await query({
       query: gql`
         query {
           repos(order_by: {
@@ -14,7 +24,7 @@ const getDataRepo = async () => {
       `
     })
   
-    return data as { repos: [{ name: string }] }
+    return data
 }
 
 export default getDataRepo

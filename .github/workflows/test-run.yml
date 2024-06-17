@@ -27,3 +27,5 @@ jobs:
           run: cargo run --release --bin dbgen
         - name: Run AUR Parser
           run: cargo run --release --bin aurparser
+        - name: Index Local Database
+          run: ./scripts/index_db.sh

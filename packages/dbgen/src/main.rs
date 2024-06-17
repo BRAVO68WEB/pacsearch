@@ -8,9 +8,22 @@ use libsql::Builder;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RepoConfig {
+    pub name: String,
+    pub url: String,
+    pub root_url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Database {
     pub name: String,
     pub packages: Vec<repoparser::Package>,
+}
+
+fn get_root_url(repo_name: &str) -> String {
+    let config: Vec<RepoConfig> = serde_json::from_str(&fs::read_to_string("config/repo.json").unwrap()).unwrap();
+    let repo = config.into_iter().find(|x| x.name == repo_name).unwrap();
+    repo.root_url
 }
 
 #[tokio::main]
@@ -83,9 +96,10 @@ async fn main() {
             .await
             .unwrap();
         for package in database.packages {
+            let download_url: String = get_root_url(&database.name.clone()) + &package.file_name;
             client
                 .execute(
-                    "INSERT INTO packages (name, file_name, base, version, description, groups, compressed_size, installed_size, md5_sum, sha256_sum, pgp_signature, home_url, license, arch, build_date, packager, replaces, conflicts, provides, repo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)",
+                    "INSERT INTO packages (name, file_name, base, version, description, groups, compressed_size, installed_size, md5_sum, sha256_sum, pgp_signature, home_url, license, arch, build_date, packager, replaces, conflicts, provides, download_url, repo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)",
                     &[
                         package.name,
                         package.file_name,
@@ -106,6 +120,7 @@ async fn main() {
                         package.replaces.map(|x| x.join(",")).unwrap_or("NULL".into()),
                         package.conflicts.map(|x| x.join(",")).unwrap_or("NULL".into()),
                         package.provides.map(|x| x.join(",")).unwrap_or("NULL".into()),
+                        download_url,
                         database.name.clone(),
                     ]
                 )
