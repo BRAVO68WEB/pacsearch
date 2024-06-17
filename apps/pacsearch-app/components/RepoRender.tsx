@@ -1,5 +1,6 @@
 "use client";
 
+import { IRepoData, IRepoListData } from "@/libs/get_repos";
 import { useRepoName } from "./NameContext";
 import { 
     createColumnHelper,
@@ -8,10 +9,10 @@ import {
     useReactTable 
 } from '@tanstack/react-table';
 
-function RepoRender({ data }: Readonly<{ data: { repos: [{ name: string }] } }>) {
+function RepoRender({ data }: Readonly<{ data: IRepoListData }>) {
     const { setName, name } = useRepoName();
 
-    const columnHelper = createColumnHelper<{name: string}>()
+    const columnHelper = createColumnHelper<IRepoData>()
 
     const columns = [
         columnHelper.accessor('name', {
