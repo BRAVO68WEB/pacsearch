@@ -227,7 +227,7 @@ echo "Removing tar files"
 rm pkgs/core.db.tar.gz
 rm pkgs/extra.db.tar.gz
 rm pkgs/multilib.db.tar.gz
-rm pkgs/chaotic-aur.zst
+rm pkgs/chaotic-aur.db.tar.zst
 rm pkgs/blackarch.db.tar.gz
 rm pkgs/mingw64.zst
 rm pkgs/mingw64.files
