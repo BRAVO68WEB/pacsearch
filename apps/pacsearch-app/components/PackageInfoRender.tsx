@@ -5,7 +5,7 @@ function PackageInfoRender({
     data
     }: Readonly<{ data: IPkgInfoData}>
 ) {
-    if(!data.packages) {
+    if(!data.packages[0]) {
         return <div className='text-xl'>No package found</div>
     }
     const  {
