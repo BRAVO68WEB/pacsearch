@@ -141,8 +141,7 @@ tar -xzf pkgs/multilib.db.tar.gz -C pkgs/multilib >/dev/null 2>&1
 echo "Extracted multilib"
 
 echo "Extracting chaotic-aur"
-cp pkgs/chaotic-aur.files pkgs/chaotic-aur.zst
-tar --zstd -xvf pkgs/chaotic-aur.zst -C pkgs/chaotic-aur >/dev/null 2>&1
+tar --zstd -xvf pkgs/chaotic-aur.db.tar.zst -C pkgs/chaotic-aur >/dev/null 2>&1
 echo "Extracted chaotic-aur"
 
 echo "Extracting blackarch"
