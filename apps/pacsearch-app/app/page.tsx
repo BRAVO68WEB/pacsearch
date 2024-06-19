@@ -16,11 +16,9 @@ export default function Home() {
                         <RepoList />
                     </div>
                     <div className="flex gap-4 flex-col border-sky-500 border-2">
-                        <div 
-                            className="flex justify-between items-center p-2"
-                        >
-                          <SearchBar />
-                          <Pagination />
+                        <div className="flex justify-between items-center p-2">
+                            <SearchBar />
+                            <Pagination />
                         </div>
                         <PackageList />
                     </div>

@@ -2,11 +2,9 @@
 
 echo "Updating local schema"
 
-# Input Hasura Token
-echo "Enter Hasura Token: "
-read -s HASURA_TOKEN
+[ -f .env ] && source .env
 
-pnpm gq https://pacsearch-api.b68.dev/v1/graphql \
+pnpm gq "$HASURA_GRAPHQL_URL" \
     -H "X-Hasura-Admin-Secret: $HASURA_TOKEN" \
     --introspect > graphql/schema.graphql
 

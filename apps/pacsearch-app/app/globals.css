@@ -3,29 +3,29 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-synthesis: none;
+    color: var(--foreground);
+    background: var(--background);
+    font-synthesis: none;
 }
 
-.react-dropdown-select-item  {
-  color: var(--foreground);
-  background: var(--background);
+.react-dropdown-select-item {
+    color: var(--foreground);
+    background: var(--background);
 }
 
 .react-dropdown-select-item:hover {
-  color: var(--background);
-  background: var(--foreground);
+    color: var(--background);
+    background: var(--foreground);
 }

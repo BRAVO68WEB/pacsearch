@@ -1,117 +1,117 @@
 [
     {
         "name": "core",
-        "url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.db.tar.gz",
-        "root_url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/"
+        "root_url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/",
+        "url": "https://geo.mirror.pkgbuild.com/core/os/x86_64/core.db.tar.gz"
     },
     {
         "name": "extra",
-        "url": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.db.tar.gz",
-        "root_url": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/"
+        "root_url": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/",
+        "url": "https://geo.mirror.pkgbuild.com/extra/os/x86_64/extra.db.tar.gz"
     },
     {
         "name": "multilib",
-        "url": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.db.tar.gz",
-        "root_url": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/"
+        "root_url": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/",
+        "url": "https://geo.mirror.pkgbuild.com/multilib/os/x86_64/multilib.db.tar.gz"
     },
     {
         "name": "chaotic-aur",
-        "url": "https://mirror.nag.albony.in/chaotic-aur/chaotic-aur/x86_64/chaotic-aur.db.tar.zst",
-        "root_url": "https://geo-mirror.chaotic.cx/chaotic-aur/x86_64/"
+        "root_url": "https://geo-mirror.chaotic.cx/chaotic-aur/x86_64/",
+        "url": "https://mirror.nag.albony.in/chaotic-aur/chaotic-aur/x86_64/chaotic-aur.db.tar.zst"
     },
     {
         "name": "blackarch",
-        "url": "https://mirrors.gethosted.online/blackarch/blackarch/blackarch/os/x86_64/blackarch.db.tar.gz",
-        "root_url": "https://mirrors.gethosted.online/blackarch/blackarch/blackarch/os/x86_64/"
+        "root_url": "https://mirrors.gethosted.online/blackarch/blackarch/blackarch/os/x86_64/",
+        "url": "https://mirrors.gethosted.online/blackarch/blackarch/blackarch/os/x86_64/blackarch.db.tar.gz"
     },
     {
         "name": "mingw64",
-        "url": "https://repo.msys2.org/mingw/x86_64/mingw64.files",
-        "root_url": "https://repo.msys2.org/mingw/x86_64/"
+        "root_url": "https://repo.msys2.org/mingw/x86_64/",
+        "url": "https://repo.msys2.org/mingw/x86_64/mingw64.files"
     },
     {
         "name": "aur",
-        "url": "https://aur.archlinux.org/packages-meta-ext-v1.json.gz",
-        "root_url": "https://aur.archlinux.org/packages/"
+        "root_url": "https://aur.archlinux.org/packages/",
+        "url": "https://aur.archlinux.org/packages-meta-ext-v1.json.gz"
     },
     {
         "name": "visual-studio-code-insiders",
-        "url": "https://nihaals.github.io/visual-studio-code-insiders-arch/visual-studio-code-insiders.db.tar.gz",
-        "root_url": "https://nihaals.github.io/visual-studio-code-insiders-arch/"
+        "root_url": "https://nihaals.github.io/visual-studio-code-insiders-arch/",
+        "url": "https://nihaals.github.io/visual-studio-code-insiders-arch/visual-studio-code-insiders.db.tar.gz"
     },
     {
         "name": "build.kilabit.info",
-        "url": "https://build.kilabit.info/aur/build.kilabit.info.db.tar.gz",
-        "root_url": "https://build.kilabit.info/aur/"
+        "root_url": "https://build.kilabit.info/aur/",
+        "url": "https://build.kilabit.info/aur/build.kilabit.info.db.tar.gz"
     },
     {
         "name": "dx37essentials",
-        "url": "https://dx37.gitlab.io/dx37essentials/x86_64/dx37essentials.db.tar.zst",
-        "root_url": "https://dx37.gitlab.io/dx37essentials/x86_64/"
+        "root_url": "https://dx37.gitlab.io/dx37essentials/x86_64/",
+        "url": "https://dx37.gitlab.io/dx37essentials/x86_64/dx37essentials.db.tar.zst"
     },
     {
         "name": "bioarchlinux",
-        "url": "https://repo.bioarchlinux.org/x86_64/bioarchlinux.db.tar.gz",
-        "root_url": "https://repo.bioarchlinux.org/x86_64/"
+        "root_url": "https://repo.bioarchlinux.org/x86_64/",
+        "url": "https://repo.bioarchlinux.org/x86_64/bioarchlinux.db.tar.gz"
     },
     {
         "name": "arch4edu",
-        "url": "https://repository.arch4edu.org/any/arch4edu.db.tar.gz",
-        "root_url": "https://repository.arch4edu.org/any/"
+        "root_url": "https://repository.arch4edu.org/any/",
+        "url": "https://repository.arch4edu.org/any/arch4edu.db.tar.gz"
     },
     {
         "name": "archlinuxcn",
-        "url": "https://repo.archlinuxcn.org/any/archlinuxcn.db.tar.gz",
-        "root_url": "https://repo.archlinuxcn.org/any/"
+        "root_url": "https://repo.archlinuxcn.org/any/",
+        "url": "https://repo.archlinuxcn.org/any/archlinuxcn.db.tar.gz"
     },
     {
         "name": "ownstuff",
-        "url": "https://martchus.dyn.f3l.de/repo/arch/ownstuff/os/any/ownstuff.db.tar.xz",
-        "root_url": "https://martchus.dyn.f3l.de/repo/arch/ownstuff/os/any/"
+        "root_url": "https://martchus.dyn.f3l.de/repo/arch/ownstuff/os/any/",
+        "url": "https://martchus.dyn.f3l.de/repo/arch/ownstuff/os/any/ownstuff.db.tar.xz"
     },
     {
         "name": "seiichiro",
-        "url": "https://www.seiichiro0185.org/repo/x86_64/seiichiro.db.tar.zst",
-        "root_url": "https://www.seiichiro0185.org/repo/x86_64/"
+        "root_url": "https://www.seiichiro0185.org/repo/x86_64/",
+        "url": "https://www.seiichiro0185.org/repo/x86_64/seiichiro.db.tar.zst"
     },
     {
         "name": "quarry",
-        "url": "https://pkgbuild.com/~anatolik/quarry/x86_64/quarry.db.tar.xz",
-        "root_url": "https://pkgbuild.com/~anatolik/quarry/x86_64/"
+        "root_url": "https://pkgbuild.com/~anatolik/quarry/x86_64/",
+        "url": "https://pkgbuild.com/~anatolik/quarry/x86_64/quarry.db.tar.xz"
     },
     {
         "name": "alex19ep",
-        "url": "https://pkgbuild.com/~alex19ep/repo/x86_64/alex19EP.db.tar.zst",
-        "root_url": "https://pkgbuild.com/~alex19ep/repo/x86_64/"
+        "root_url": "https://pkgbuild.com/~alex19ep/repo/x86_64/",
+        "url": "https://pkgbuild.com/~alex19ep/repo/x86_64/alex19EP.db.tar.zst"
     },
     {
         "name": "artafinde",
-        "url": "https://pkgbuild.com/~artafinde/repo/artafinde.db.tar.gz",
-        "root_url": "https://pkgbuild.com/~artafinde/repo/"
+        "root_url": "https://pkgbuild.com/~artafinde/repo/",
+        "url": "https://pkgbuild.com/~artafinde/repo/artafinde.db.tar.gz"
     },
     {
         "name": "dbermond",
-        "url": "https://pkgbuild.com/~dbermond/repo/x86_64/dbermond.db.tar.zst",
-        "root_url": "https://pkgbuild.com/~dbermond/repo/x86_64/"
+        "root_url": "https://pkgbuild.com/~dbermond/repo/x86_64/",
+        "url": "https://pkgbuild.com/~dbermond/repo/x86_64/dbermond.db.tar.zst"
     },
     {
         "name": "grawlinson",
-        "url": "https://pkgbuild.com/~grawlinson/repo/grawlinson/grawlinson.db.tar.xz",
-        "root_url": "https://pkgbuild.com/~grawlinson/repo/grawlinson/"
+        "root_url": "https://pkgbuild.com/~grawlinson/repo/grawlinson/",
+        "url": "https://pkgbuild.com/~grawlinson/repo/grawlinson/grawlinson.db.tar.xz"
     },
     {
         "name": "heftig",
-        "url": "https://pkgbuild.com/~heftig/repo/x86_64/heftig.db.tar.gz",
-        "root_url": "https://pkgbuild.com/~heftig/repo/x86_64/"
+        "root_url": "https://pkgbuild.com/~heftig/repo/x86_64/",
+        "url": "https://pkgbuild.com/~heftig/repo/x86_64/heftig.db.tar.gz"
     },
     {
         "name": "maximbaz",
-        "url": "https://pkgbuild.com/~maximbaz/repo/aarch64/maximbaz.db.tar",
-        "root_url": "https://pkgbuild.com/~maximbaz/repo/aarch64/"
+        "root_url": "https://pkgbuild.com/~maximbaz/repo/aarch64/",
+        "url": "https://pkgbuild.com/~maximbaz/repo/aarch64/maximbaz.db.tar"
     },
     {
         "name": "orhun",
-        "url": "https://pkgbuild.com/~orhun/repo/orhun.db.tar.gz",
-        "root_url": "https://pkgbuild.com/~orhun/repo/"
+        "root_url": "https://pkgbuild.com/~orhun/repo/",
+        "url": "https://pkgbuild.com/~orhun/repo/orhun.db.tar.gz"
     }
 ]

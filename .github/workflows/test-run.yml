@@ -1,31 +1,31 @@
 name: "Project Test Run"
 
 on:
-  workflow_dispatch: 
-  push:
-    branches:
-      - main
-  pull_request:
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+    pull_request:
 
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v2
-        - name: Installing Rust
-          uses: actions-rust-lang/setup-rust-toolchain@v1
-        - name: Download PKG Databases
-          run: ./scripts/get_pkgs.sh
-        - name: Init Local Database
-          run: ./scripts/init_db.sh
-        - name: Building with Cargo
-          uses: actions-rs/cargo@v1
-          with:
-            command: build
-            args: --release
-        - name: Run DBGen Parse
-          run: cargo run --release --bin dbgen
-        - name: Run AUR Parser
-          run: cargo run --release --bin aurparser
-        - name: Index Local Database
-          run: ./scripts/index_db.sh
+            - uses: actions/checkout@v2
+            - name: Installing Rust
+              uses: actions-rust-lang/setup-rust-toolchain@v1
+            - name: Download PKG Databases
+              run: ./scripts/get_pkgs.sh
+            - name: Init Local Database
+              run: ./scripts/init_db.sh
+            - name: Building with Cargo
+              uses: actions-rs/cargo@v1
+              with:
+                  command: build
+                  args: --release
+            - name: Run DBGen Parse
+              run: cargo run --release --bin dbgen
+            - name: Run AUR Parser
+              run: cargo run --release --bin aurparser
+            - name: Index Local Database
+              run: ./scripts/index_db.sh
