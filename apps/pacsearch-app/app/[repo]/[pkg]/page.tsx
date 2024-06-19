@@ -43,7 +43,7 @@ export async function generateMetadata(
             type: "website",
             images: [
                 {
-                    url: "https://pacsearch.b68.dev/og-image.png",
+                    url: "https://pacsearch-assets.b68.dev/og-image.png",
                     width: 1200,
                     height: 630,
                     alt: "pacsearch",
