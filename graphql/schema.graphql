@@ -1,1176 +1,1302 @@
 schema {
-  query: query_root
-  mutation: mutation_root
-  subscription: subscription_root
+    query: query_root
+    mutation: mutation_root
+    subscription: subscription_root
 }
 
-"""whether this query should be cached (Hasura Cloud only)"""
+"""
+whether this query should be cached (Hasura Cloud only)
+"""
 directive @cached(
-  """measured in seconds"""
-  ttl: Int! = 60
+    """
+    measured in seconds
+    """
+    ttl: Int! = 60
 
-  """refresh the cache entry"""
-  refresh: Boolean! = false
+    """
+    refresh the cache entry
+    """
+    refresh: Boolean! = false
 ) on QUERY
 
 """
 Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
 """
 input Int_comparison_exp {
-  _eq: Int
-  _gt: Int
-  _gte: Int
-  _in: [Int!]
-  _is_null: Boolean
-  _lt: Int
-  _lte: Int
-  _neq: Int
-  _nin: [Int!]
+    _eq: Int
+    _gt: Int
+    _gte: Int
+    _in: [Int!]
+    _is_null: Boolean
+    _lt: Int
+    _lte: Int
+    _neq: Int
+    _nin: [Int!]
 }
 
 """
 Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
 """
 input String_comparison_exp {
-  _eq: String
-  _gt: String
-  _gte: String
+    _eq: String
+    _gt: String
+    _gte: String
 
-  """does the column match the given case-insensitive pattern"""
-  _ilike: String
-  _in: [String!]
+    """
+    does the column match the given case-insensitive pattern
+    """
+    _ilike: String
+    _in: [String!]
 
-  """
-  does the column match the given POSIX regular expression, case insensitive
-  """
-  _iregex: String
-  _is_null: Boolean
+    """
+    does the column match the given POSIX regular expression, case insensitive
+    """
+    _iregex: String
+    _is_null: Boolean
 
-  """does the column match the given pattern"""
-  _like: String
-  _lt: String
-  _lte: String
-  _neq: String
+    """
+    does the column match the given pattern
+    """
+    _like: String
+    _lt: String
+    _lte: String
+    _neq: String
 
-  """does the column NOT match the given case-insensitive pattern"""
-  _nilike: String
-  _nin: [String!]
+    """
+    does the column NOT match the given case-insensitive pattern
+    """
+    _nilike: String
+    _nin: [String!]
 
-  """
-  does the column NOT match the given POSIX regular expression, case insensitive
-  """
-  _niregex: String
+    """
+    does the column NOT match the given POSIX regular expression, case insensitive
+    """
+    _niregex: String
 
-  """does the column NOT match the given pattern"""
-  _nlike: String
+    """
+    does the column NOT match the given pattern
+    """
+    _nlike: String
 
-  """
-  does the column NOT match the given POSIX regular expression, case sensitive
-  """
-  _nregex: String
+    """
+    does the column NOT match the given POSIX regular expression, case sensitive
+    """
+    _nregex: String
 
-  """does the column NOT match the given SQL regular expression"""
-  _nsimilar: String
+    """
+    does the column NOT match the given SQL regular expression
+    """
+    _nsimilar: String
 
-  """
-  does the column match the given POSIX regular expression, case sensitive
-  """
-  _regex: String
+    """
+    does the column match the given POSIX regular expression, case sensitive
+    """
+    _regex: String
 
-  """does the column match the given SQL regular expression"""
-  _similar: String
+    """
+    does the column match the given SQL regular expression
+    """
+    _similar: String
 }
 
-scalar bigint
-
 """
-Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'.
+ordering argument of a cursor
 """
-input bigint_comparison_exp {
-  _eq: bigint
-  _gt: bigint
-  _gte: bigint
-  _in: [bigint!]
-  _is_null: Boolean
-  _lt: bigint
-  _lte: bigint
-  _neq: bigint
-  _nin: [bigint!]
-}
-
-"""ordering argument of a cursor"""
 enum cursor_ordering {
-  """ascending ordering of the cursor"""
-  ASC
+    """
+    ascending ordering of the cursor
+    """
+    ASC
 
-  """descending ordering of the cursor"""
-  DESC
+    """
+    descending ordering of the cursor
+    """
+    DESC
 }
 
-scalar date
-
 """
-Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'.
+mutation root
 """
-input date_comparison_exp {
-  _eq: date
-  _gt: date
-  _gte: date
-  _in: [date!]
-  _is_null: Boolean
-  _lt: date
-  _lte: date
-  _neq: date
-  _nin: [date!]
-}
-
-"""mutation root"""
 type mutation_root {
-  """
-  delete data from the table: "packages"
-  """
-  delete_packages(
-    """filter the rows which have to be deleted"""
-    where: packages_bool_exp!
-  ): packages_mutation_response
+    """
+    delete data from the table: "packages"
+    """
+    delete_packages(
+        """
+        filter the rows which have to be deleted
+        """
+        where: packages_bool_exp!
+    ): packages_mutation_response
 
-  """
-  delete data from the table: "repos"
-  """
-  delete_repos(
-    """filter the rows which have to be deleted"""
-    where: repos_bool_exp!
-  ): repos_mutation_response
+    """
+    delete data from the table: "repos"
+    """
+    delete_repos(
+        """
+        filter the rows which have to be deleted
+        """
+        where: repos_bool_exp!
+    ): repos_mutation_response
 
-  """
-  delete single row from the table: "repos"
-  """
-  delete_repos_by_pk(name: String!): repos
+    """
+    delete single row from the table: "repos"
+    """
+    delete_repos_by_pk(name: String!): repos
 
-  """
-  insert data into the table: "packages"
-  """
-  insert_packages(
-    """the rows to be inserted"""
-    objects: [packages_insert_input!]!
-  ): packages_mutation_response
+    """
+    insert data into the table: "packages"
+    """
+    insert_packages(
+        """
+        the rows to be inserted
+        """
+        objects: [packages_insert_input!]!
+    ): packages_mutation_response
 
-  """
-  insert a single row into the table: "packages"
-  """
-  insert_packages_one(
-    """the row to be inserted"""
-    object: packages_insert_input!
-  ): packages
+    """
+    insert a single row into the table: "packages"
+    """
+    insert_packages_one(
+        """
+        the row to be inserted
+        """
+        object: packages_insert_input!
+    ): packages
 
-  """
-  insert data into the table: "repos"
-  """
-  insert_repos(
-    """the rows to be inserted"""
-    objects: [repos_insert_input!]!
+    """
+    insert data into the table: "repos"
+    """
+    insert_repos(
+        """
+        the rows to be inserted
+        """
+        objects: [repos_insert_input!]!
 
-    """upsert condition"""
-    on_conflict: repos_on_conflict
-  ): repos_mutation_response
+        """
+        upsert condition
+        """
+        on_conflict: repos_on_conflict
+    ): repos_mutation_response
 
-  """
-  insert a single row into the table: "repos"
-  """
-  insert_repos_one(
-    """the row to be inserted"""
-    object: repos_insert_input!
+    """
+    insert a single row into the table: "repos"
+    """
+    insert_repos_one(
+        """
+        the row to be inserted
+        """
+        object: repos_insert_input!
 
-    """upsert condition"""
-    on_conflict: repos_on_conflict
-  ): repos
+        """
+        upsert condition
+        """
+        on_conflict: repos_on_conflict
+    ): repos
 
-  """
-  update data of the table: "packages"
-  """
-  update_packages(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: packages_inc_input
+    """
+    update data of the table: "packages"
+    """
+    update_packages(
+        """
+        sets the columns of the filtered rows to the given values
+        """
+        _set: packages_set_input
 
-    """sets the columns of the filtered rows to the given values"""
-    _set: packages_set_input
+        """
+        filter the rows which have to be updated
+        """
+        where: packages_bool_exp!
+    ): packages_mutation_response
 
-    """filter the rows which have to be updated"""
-    where: packages_bool_exp!
-  ): packages_mutation_response
+    """
+    update multiples rows of table: "packages"
+    """
+    update_packages_many(
+        """
+        updates to execute, in order
+        """
+        updates: [packages_updates!]!
+    ): [packages_mutation_response]
 
-  """
-  update multiples rows of table: "packages"
-  """
-  update_packages_many(
-    """updates to execute, in order"""
-    updates: [packages_updates!]!
-  ): [packages_mutation_response]
+    """
+    update data of the table: "repos"
+    """
+    update_repos(
+        """
+        sets the columns of the filtered rows to the given values
+        """
+        _set: repos_set_input
 
-  """
-  update data of the table: "repos"
-  """
-  update_repos(
-    """sets the columns of the filtered rows to the given values"""
-    _set: repos_set_input
+        """
+        filter the rows which have to be updated
+        """
+        where: repos_bool_exp!
+    ): repos_mutation_response
 
-    """filter the rows which have to be updated"""
-    where: repos_bool_exp!
-  ): repos_mutation_response
+    """
+    update single row of the table: "repos"
+    """
+    update_repos_by_pk(
+        """
+        sets the columns of the filtered rows to the given values
+        """
+        _set: repos_set_input
+        pk_columns: repos_pk_columns_input!
+    ): repos
 
-  """
-  update single row of the table: "repos"
-  """
-  update_repos_by_pk(
-    """sets the columns of the filtered rows to the given values"""
-    _set: repos_set_input
-    pk_columns: repos_pk_columns_input!
-  ): repos
-
-  """
-  update multiples rows of table: "repos"
-  """
-  update_repos_many(
-    """updates to execute, in order"""
-    updates: [repos_updates!]!
-  ): [repos_mutation_response]
+    """
+    update multiples rows of table: "repos"
+    """
+    update_repos_many(
+        """
+        updates to execute, in order
+        """
+        updates: [repos_updates!]!
+    ): [repos_mutation_response]
 }
 
-"""column ordering options"""
+"""
+column ordering options
+"""
 enum order_by {
-  """in ascending order, nulls last"""
-  asc
+    """
+    in ascending order, nulls last
+    """
+    asc
 
-  """in ascending order, nulls first"""
-  asc_nulls_first
+    """
+    in ascending order, nulls first
+    """
+    asc_nulls_first
 
-  """in ascending order, nulls last"""
-  asc_nulls_last
+    """
+    in ascending order, nulls last
+    """
+    asc_nulls_last
 
-  """in descending order, nulls first"""
-  desc
+    """
+    in descending order, nulls first
+    """
+    desc
 
-  """in descending order, nulls first"""
-  desc_nulls_first
+    """
+    in descending order, nulls first
+    """
+    desc_nulls_first
 
-  """in descending order, nulls last"""
-  desc_nulls_last
+    """
+    in descending order, nulls last
+    """
+    desc_nulls_last
 }
 
 """
 columns and relationships of "packages"
 """
 type packages {
-  arch: String
-  base: String
-  build_date: date
-  compressed_size: bigint
-  conflicts: String
-  description: String
-  file_name: String
-  groups: String
-  home_url: String
-  installed_size: bigint
-  license: String
-  md5_sum: String
-  name: String
-  packager: String
-  pgp_signature: String
-  provides: String
-  replaces: String
-  repo: String
+    arch: String
+    base: String
+    build_date: String
+    compressed_size: String
+    conflicts: String
+    description: String
+    download_url: String
+    file_name: String
+    groups: String
+    home_url: String
+    installed_size: String
+    license: String
+    md5_sum: String
+    name: String
+    packager: String
+    pgp_signature: String
+    provides: String
+    replaces: String
+    repo: String
 
-  """An object relationship"""
-  repoByRepo: repos
-  sha256_sum: String
-  version: String
+    """
+    An object relationship
+    """
+    repoByRepo: repos
+    sha256_sum: String
+    version: String
 }
 
 """
 aggregated selection of "packages"
 """
 type packages_aggregate {
-  aggregate: packages_aggregate_fields
-  nodes: [packages!]!
+    aggregate: packages_aggregate_fields
+    nodes: [packages!]!
 }
 
 input packages_aggregate_bool_exp {
-  count: packages_aggregate_bool_exp_count
+    count: packages_aggregate_bool_exp_count
 }
 
 input packages_aggregate_bool_exp_count {
-  arguments: [packages_select_column!]
-  distinct: Boolean
-  filter: packages_bool_exp
-  predicate: Int_comparison_exp!
+    arguments: [packages_select_column!]
+    distinct: Boolean
+    filter: packages_bool_exp
+    predicate: Int_comparison_exp!
 }
 
 """
 aggregate fields of "packages"
 """
 type packages_aggregate_fields {
-  avg: packages_avg_fields
-  count(columns: [packages_select_column!], distinct: Boolean): Int!
-  max: packages_max_fields
-  min: packages_min_fields
-  stddev: packages_stddev_fields
-  stddev_pop: packages_stddev_pop_fields
-  stddev_samp: packages_stddev_samp_fields
-  sum: packages_sum_fields
-  var_pop: packages_var_pop_fields
-  var_samp: packages_var_samp_fields
-  variance: packages_variance_fields
+    count(columns: [packages_select_column!], distinct: Boolean): Int!
+    max: packages_max_fields
+    min: packages_min_fields
 }
 
 """
 order by aggregate values of table "packages"
 """
 input packages_aggregate_order_by {
-  avg: packages_avg_order_by
-  count: order_by
-  max: packages_max_order_by
-  min: packages_min_order_by
-  stddev: packages_stddev_order_by
-  stddev_pop: packages_stddev_pop_order_by
-  stddev_samp: packages_stddev_samp_order_by
-  sum: packages_sum_order_by
-  var_pop: packages_var_pop_order_by
-  var_samp: packages_var_samp_order_by
-  variance: packages_variance_order_by
+    count: order_by
+    max: packages_max_order_by
+    min: packages_min_order_by
 }
 
 """
 input type for inserting array relation for remote table "packages"
 """
 input packages_arr_rel_insert_input {
-  data: [packages_insert_input!]!
-}
-
-"""aggregate avg on columns"""
-type packages_avg_fields {
-  compressed_size: Float
-  installed_size: Float
-}
-
-"""
-order by avg() on columns of table "packages"
-"""
-input packages_avg_order_by {
-  compressed_size: order_by
-  installed_size: order_by
+    data: [packages_insert_input!]!
 }
 
 """
 Boolean expression to filter rows from the table "packages". All fields are combined with a logical 'AND'.
 """
 input packages_bool_exp {
-  _and: [packages_bool_exp!]
-  _not: packages_bool_exp
-  _or: [packages_bool_exp!]
-  arch: String_comparison_exp
-  base: String_comparison_exp
-  build_date: date_comparison_exp
-  compressed_size: bigint_comparison_exp
-  conflicts: String_comparison_exp
-  description: String_comparison_exp
-  file_name: String_comparison_exp
-  groups: String_comparison_exp
-  home_url: String_comparison_exp
-  installed_size: bigint_comparison_exp
-  license: String_comparison_exp
-  md5_sum: String_comparison_exp
-  name: String_comparison_exp
-  packager: String_comparison_exp
-  pgp_signature: String_comparison_exp
-  provides: String_comparison_exp
-  replaces: String_comparison_exp
-  repo: String_comparison_exp
-  repoByRepo: repos_bool_exp
-  sha256_sum: String_comparison_exp
-  version: String_comparison_exp
-}
-
-"""
-input type for incrementing numeric columns in table "packages"
-"""
-input packages_inc_input {
-  compressed_size: bigint
-  installed_size: bigint
+    _and: [packages_bool_exp!]
+    _not: packages_bool_exp
+    _or: [packages_bool_exp!]
+    arch: String_comparison_exp
+    base: String_comparison_exp
+    build_date: String_comparison_exp
+    compressed_size: String_comparison_exp
+    conflicts: String_comparison_exp
+    description: String_comparison_exp
+    download_url: String_comparison_exp
+    file_name: String_comparison_exp
+    groups: String_comparison_exp
+    home_url: String_comparison_exp
+    installed_size: String_comparison_exp
+    license: String_comparison_exp
+    md5_sum: String_comparison_exp
+    name: String_comparison_exp
+    packager: String_comparison_exp
+    pgp_signature: String_comparison_exp
+    provides: String_comparison_exp
+    replaces: String_comparison_exp
+    repo: String_comparison_exp
+    repoByRepo: repos_bool_exp
+    sha256_sum: String_comparison_exp
+    version: String_comparison_exp
 }
 
 """
 input type for inserting data into table "packages"
 """
 input packages_insert_input {
-  arch: String
-  base: String
-  build_date: date
-  compressed_size: bigint
-  conflicts: String
-  description: String
-  file_name: String
-  groups: String
-  home_url: String
-  installed_size: bigint
-  license: String
-  md5_sum: String
-  name: String
-  packager: String
-  pgp_signature: String
-  provides: String
-  replaces: String
-  repo: String
-  repoByRepo: repos_obj_rel_insert_input
-  sha256_sum: String
-  version: String
+    arch: String
+    base: String
+    build_date: String
+    compressed_size: String
+    conflicts: String
+    description: String
+    download_url: String
+    file_name: String
+    groups: String
+    home_url: String
+    installed_size: String
+    license: String
+    md5_sum: String
+    name: String
+    packager: String
+    pgp_signature: String
+    provides: String
+    replaces: String
+    repo: String
+    repoByRepo: repos_obj_rel_insert_input
+    sha256_sum: String
+    version: String
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type packages_max_fields {
-  arch: String
-  base: String
-  build_date: date
-  compressed_size: bigint
-  conflicts: String
-  description: String
-  file_name: String
-  groups: String
-  home_url: String
-  installed_size: bigint
-  license: String
-  md5_sum: String
-  name: String
-  packager: String
-  pgp_signature: String
-  provides: String
-  replaces: String
-  repo: String
-  sha256_sum: String
-  version: String
+    arch: String
+    base: String
+    build_date: String
+    compressed_size: String
+    conflicts: String
+    description: String
+    download_url: String
+    file_name: String
+    groups: String
+    home_url: String
+    installed_size: String
+    license: String
+    md5_sum: String
+    name: String
+    packager: String
+    pgp_signature: String
+    provides: String
+    replaces: String
+    repo: String
+    sha256_sum: String
+    version: String
 }
 
 """
 order by max() on columns of table "packages"
 """
 input packages_max_order_by {
-  arch: order_by
-  base: order_by
-  build_date: order_by
-  compressed_size: order_by
-  conflicts: order_by
-  description: order_by
-  file_name: order_by
-  groups: order_by
-  home_url: order_by
-  installed_size: order_by
-  license: order_by
-  md5_sum: order_by
-  name: order_by
-  packager: order_by
-  pgp_signature: order_by
-  provides: order_by
-  replaces: order_by
-  repo: order_by
-  sha256_sum: order_by
-  version: order_by
+    arch: order_by
+    base: order_by
+    build_date: order_by
+    compressed_size: order_by
+    conflicts: order_by
+    description: order_by
+    download_url: order_by
+    file_name: order_by
+    groups: order_by
+    home_url: order_by
+    installed_size: order_by
+    license: order_by
+    md5_sum: order_by
+    name: order_by
+    packager: order_by
+    pgp_signature: order_by
+    provides: order_by
+    replaces: order_by
+    repo: order_by
+    sha256_sum: order_by
+    version: order_by
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type packages_min_fields {
-  arch: String
-  base: String
-  build_date: date
-  compressed_size: bigint
-  conflicts: String
-  description: String
-  file_name: String
-  groups: String
-  home_url: String
-  installed_size: bigint
-  license: String
-  md5_sum: String
-  name: String
-  packager: String
-  pgp_signature: String
-  provides: String
-  replaces: String
-  repo: String
-  sha256_sum: String
-  version: String
+    arch: String
+    base: String
+    build_date: String
+    compressed_size: String
+    conflicts: String
+    description: String
+    download_url: String
+    file_name: String
+    groups: String
+    home_url: String
+    installed_size: String
+    license: String
+    md5_sum: String
+    name: String
+    packager: String
+    pgp_signature: String
+    provides: String
+    replaces: String
+    repo: String
+    sha256_sum: String
+    version: String
 }
 
 """
 order by min() on columns of table "packages"
 """
 input packages_min_order_by {
-  arch: order_by
-  base: order_by
-  build_date: order_by
-  compressed_size: order_by
-  conflicts: order_by
-  description: order_by
-  file_name: order_by
-  groups: order_by
-  home_url: order_by
-  installed_size: order_by
-  license: order_by
-  md5_sum: order_by
-  name: order_by
-  packager: order_by
-  pgp_signature: order_by
-  provides: order_by
-  replaces: order_by
-  repo: order_by
-  sha256_sum: order_by
-  version: order_by
+    arch: order_by
+    base: order_by
+    build_date: order_by
+    compressed_size: order_by
+    conflicts: order_by
+    description: order_by
+    download_url: order_by
+    file_name: order_by
+    groups: order_by
+    home_url: order_by
+    installed_size: order_by
+    license: order_by
+    md5_sum: order_by
+    name: order_by
+    packager: order_by
+    pgp_signature: order_by
+    provides: order_by
+    replaces: order_by
+    repo: order_by
+    sha256_sum: order_by
+    version: order_by
 }
 
 """
 response of any mutation on the table "packages"
 """
 type packages_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
+    """
+    number of rows affected by the mutation
+    """
+    affected_rows: Int!
 
-  """data from the rows affected by the mutation"""
-  returning: [packages!]!
+    """
+    data from the rows affected by the mutation
+    """
+    returning: [packages!]!
 }
 
-"""Ordering options when selecting data from "packages"."""
+"""
+Ordering options when selecting data from "packages".
+"""
 input packages_order_by {
-  arch: order_by
-  base: order_by
-  build_date: order_by
-  compressed_size: order_by
-  conflicts: order_by
-  description: order_by
-  file_name: order_by
-  groups: order_by
-  home_url: order_by
-  installed_size: order_by
-  license: order_by
-  md5_sum: order_by
-  name: order_by
-  packager: order_by
-  pgp_signature: order_by
-  provides: order_by
-  replaces: order_by
-  repo: order_by
-  repoByRepo: repos_order_by
-  sha256_sum: order_by
-  version: order_by
+    arch: order_by
+    base: order_by
+    build_date: order_by
+    compressed_size: order_by
+    conflicts: order_by
+    description: order_by
+    download_url: order_by
+    file_name: order_by
+    groups: order_by
+    home_url: order_by
+    installed_size: order_by
+    license: order_by
+    md5_sum: order_by
+    name: order_by
+    packager: order_by
+    pgp_signature: order_by
+    provides: order_by
+    replaces: order_by
+    repo: order_by
+    repoByRepo: repos_order_by
+    sha256_sum: order_by
+    version: order_by
 }
 
 """
 select columns of table "packages"
 """
 enum packages_select_column {
-  """column name"""
-  arch
+    """
+    column name
+    """
+    arch
 
-  """column name"""
-  base
+    """
+    column name
+    """
+    base
 
-  """column name"""
-  build_date
+    """
+    column name
+    """
+    build_date
 
-  """column name"""
-  compressed_size
+    """
+    column name
+    """
+    compressed_size
 
-  """column name"""
-  conflicts
+    """
+    column name
+    """
+    conflicts
 
-  """column name"""
-  description
+    """
+    column name
+    """
+    description
 
-  """column name"""
-  file_name
+    """
+    column name
+    """
+    download_url
 
-  """column name"""
-  groups
+    """
+    column name
+    """
+    file_name
 
-  """column name"""
-  home_url
+    """
+    column name
+    """
+    groups
 
-  """column name"""
-  installed_size
+    """
+    column name
+    """
+    home_url
 
-  """column name"""
-  license
+    """
+    column name
+    """
+    installed_size
 
-  """column name"""
-  md5_sum
+    """
+    column name
+    """
+    license
 
-  """column name"""
-  name
+    """
+    column name
+    """
+    md5_sum
 
-  """column name"""
-  packager
+    """
+    column name
+    """
+    name
 
-  """column name"""
-  pgp_signature
+    """
+    column name
+    """
+    packager
 
-  """column name"""
-  provides
+    """
+    column name
+    """
+    pgp_signature
 
-  """column name"""
-  replaces
+    """
+    column name
+    """
+    provides
 
-  """column name"""
-  repo
+    """
+    column name
+    """
+    replaces
 
-  """column name"""
-  sha256_sum
+    """
+    column name
+    """
+    repo
 
-  """column name"""
-  version
+    """
+    column name
+    """
+    sha256_sum
+
+    """
+    column name
+    """
+    version
 }
 
 """
 input type for updating data in table "packages"
 """
 input packages_set_input {
-  arch: String
-  base: String
-  build_date: date
-  compressed_size: bigint
-  conflicts: String
-  description: String
-  file_name: String
-  groups: String
-  home_url: String
-  installed_size: bigint
-  license: String
-  md5_sum: String
-  name: String
-  packager: String
-  pgp_signature: String
-  provides: String
-  replaces: String
-  repo: String
-  sha256_sum: String
-  version: String
-}
-
-"""aggregate stddev on columns"""
-type packages_stddev_fields {
-  compressed_size: Float
-  installed_size: Float
-}
-
-"""
-order by stddev() on columns of table "packages"
-"""
-input packages_stddev_order_by {
-  compressed_size: order_by
-  installed_size: order_by
-}
-
-"""aggregate stddev_pop on columns"""
-type packages_stddev_pop_fields {
-  compressed_size: Float
-  installed_size: Float
-}
-
-"""
-order by stddev_pop() on columns of table "packages"
-"""
-input packages_stddev_pop_order_by {
-  compressed_size: order_by
-  installed_size: order_by
-}
-
-"""aggregate stddev_samp on columns"""
-type packages_stddev_samp_fields {
-  compressed_size: Float
-  installed_size: Float
-}
-
-"""
-order by stddev_samp() on columns of table "packages"
-"""
-input packages_stddev_samp_order_by {
-  compressed_size: order_by
-  installed_size: order_by
+    arch: String
+    base: String
+    build_date: String
+    compressed_size: String
+    conflicts: String
+    description: String
+    download_url: String
+    file_name: String
+    groups: String
+    home_url: String
+    installed_size: String
+    license: String
+    md5_sum: String
+    name: String
+    packager: String
+    pgp_signature: String
+    provides: String
+    replaces: String
+    repo: String
+    sha256_sum: String
+    version: String
 }
 
 """
 Streaming cursor of the table "packages"
 """
 input packages_stream_cursor_input {
-  """Stream column input with initial value"""
-  initial_value: packages_stream_cursor_value_input!
+    """
+    Stream column input with initial value
+    """
+    initial_value: packages_stream_cursor_value_input!
 
-  """cursor ordering"""
-  ordering: cursor_ordering
+    """
+    cursor ordering
+    """
+    ordering: cursor_ordering
 }
 
-"""Initial value of the column from where the streaming should start"""
+"""
+Initial value of the column from where the streaming should start
+"""
 input packages_stream_cursor_value_input {
-  arch: String
-  base: String
-  build_date: date
-  compressed_size: bigint
-  conflicts: String
-  description: String
-  file_name: String
-  groups: String
-  home_url: String
-  installed_size: bigint
-  license: String
-  md5_sum: String
-  name: String
-  packager: String
-  pgp_signature: String
-  provides: String
-  replaces: String
-  repo: String
-  sha256_sum: String
-  version: String
-}
-
-"""aggregate sum on columns"""
-type packages_sum_fields {
-  compressed_size: bigint
-  installed_size: bigint
-}
-
-"""
-order by sum() on columns of table "packages"
-"""
-input packages_sum_order_by {
-  compressed_size: order_by
-  installed_size: order_by
+    arch: String
+    base: String
+    build_date: String
+    compressed_size: String
+    conflicts: String
+    description: String
+    download_url: String
+    file_name: String
+    groups: String
+    home_url: String
+    installed_size: String
+    license: String
+    md5_sum: String
+    name: String
+    packager: String
+    pgp_signature: String
+    provides: String
+    replaces: String
+    repo: String
+    sha256_sum: String
+    version: String
 }
 
 input packages_updates {
-  """increments the numeric columns with given value of the filtered values"""
-  _inc: packages_inc_input
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: packages_set_input
 
-  """sets the columns of the filtered rows to the given values"""
-  _set: packages_set_input
-
-  """filter the rows which have to be updated"""
-  where: packages_bool_exp!
-}
-
-"""aggregate var_pop on columns"""
-type packages_var_pop_fields {
-  compressed_size: Float
-  installed_size: Float
-}
-
-"""
-order by var_pop() on columns of table "packages"
-"""
-input packages_var_pop_order_by {
-  compressed_size: order_by
-  installed_size: order_by
-}
-
-"""aggregate var_samp on columns"""
-type packages_var_samp_fields {
-  compressed_size: Float
-  installed_size: Float
-}
-
-"""
-order by var_samp() on columns of table "packages"
-"""
-input packages_var_samp_order_by {
-  compressed_size: order_by
-  installed_size: order_by
-}
-
-"""aggregate variance on columns"""
-type packages_variance_fields {
-  compressed_size: Float
-  installed_size: Float
-}
-
-"""
-order by variance() on columns of table "packages"
-"""
-input packages_variance_order_by {
-  compressed_size: order_by
-  installed_size: order_by
+    """
+    filter the rows which have to be updated
+    """
+    where: packages_bool_exp!
 }
 
 type query_root {
-  """An array relationship"""
-  packages(
-    """distinct select on columns"""
-    distinct_on: [packages_select_column!]
+    """
+    An array relationship
+    """
+    packages(
+        """
+        distinct select on columns
+        """
+        distinct_on: [packages_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [packages_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [packages_order_by!]
 
-    """filter the rows returned"""
-    where: packages_bool_exp
-  ): [packages!]!
+        """
+        filter the rows returned
+        """
+        where: packages_bool_exp
+    ): [packages!]!
 
-  """An aggregate relationship"""
-  packages_aggregate(
-    """distinct select on columns"""
-    distinct_on: [packages_select_column!]
+    """
+    An aggregate relationship
+    """
+    packages_aggregate(
+        """
+        distinct select on columns
+        """
+        distinct_on: [packages_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [packages_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [packages_order_by!]
 
-    """filter the rows returned"""
-    where: packages_bool_exp
-  ): packages_aggregate!
+        """
+        filter the rows returned
+        """
+        where: packages_bool_exp
+    ): packages_aggregate!
 
-  """
-  fetch data from the table: "repos"
-  """
-  repos(
-    """distinct select on columns"""
-    distinct_on: [repos_select_column!]
+    """
+    fetch data from the table: "repos"
+    """
+    repos(
+        """
+        distinct select on columns
+        """
+        distinct_on: [repos_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [repos_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [repos_order_by!]
 
-    """filter the rows returned"""
-    where: repos_bool_exp
-  ): [repos!]!
+        """
+        filter the rows returned
+        """
+        where: repos_bool_exp
+    ): [repos!]!
 
-  """
-  fetch aggregated fields from the table: "repos"
-  """
-  repos_aggregate(
-    """distinct select on columns"""
-    distinct_on: [repos_select_column!]
+    """
+    fetch aggregated fields from the table: "repos"
+    """
+    repos_aggregate(
+        """
+        distinct select on columns
+        """
+        distinct_on: [repos_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [repos_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [repos_order_by!]
 
-    """filter the rows returned"""
-    where: repos_bool_exp
-  ): repos_aggregate!
+        """
+        filter the rows returned
+        """
+        where: repos_bool_exp
+    ): repos_aggregate!
 
-  """fetch data from the table: "repos" using primary key columns"""
-  repos_by_pk(name: String!): repos
+    """
+    fetch data from the table: "repos" using primary key columns
+    """
+    repos_by_pk(name: String!): repos
 }
 
 """
 columns and relationships of "repos"
 """
 type repos {
-  name: String!
+    name: String!
 
-  """An array relationship"""
-  packages(
-    """distinct select on columns"""
-    distinct_on: [packages_select_column!]
+    """
+    An array relationship
+    """
+    packages(
+        """
+        distinct select on columns
+        """
+        distinct_on: [packages_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [packages_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [packages_order_by!]
 
-    """filter the rows returned"""
-    where: packages_bool_exp
-  ): [packages!]!
+        """
+        filter the rows returned
+        """
+        where: packages_bool_exp
+    ): [packages!]!
 
-  """An aggregate relationship"""
-  packages_aggregate(
-    """distinct select on columns"""
-    distinct_on: [packages_select_column!]
+    """
+    An aggregate relationship
+    """
+    packages_aggregate(
+        """
+        distinct select on columns
+        """
+        distinct_on: [packages_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [packages_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [packages_order_by!]
 
-    """filter the rows returned"""
-    where: packages_bool_exp
-  ): packages_aggregate!
+        """
+        filter the rows returned
+        """
+        where: packages_bool_exp
+    ): packages_aggregate!
 }
 
 """
 aggregated selection of "repos"
 """
 type repos_aggregate {
-  aggregate: repos_aggregate_fields
-  nodes: [repos!]!
+    aggregate: repos_aggregate_fields
+    nodes: [repos!]!
 }
 
 """
 aggregate fields of "repos"
 """
 type repos_aggregate_fields {
-  count(columns: [repos_select_column!], distinct: Boolean): Int!
-  max: repos_max_fields
-  min: repos_min_fields
+    count(columns: [repos_select_column!], distinct: Boolean): Int!
+    max: repos_max_fields
+    min: repos_min_fields
 }
 
 """
 Boolean expression to filter rows from the table "repos". All fields are combined with a logical 'AND'.
 """
 input repos_bool_exp {
-  _and: [repos_bool_exp!]
-  _not: repos_bool_exp
-  _or: [repos_bool_exp!]
-  name: String_comparison_exp
-  packages: packages_bool_exp
-  packages_aggregate: packages_aggregate_bool_exp
+    _and: [repos_bool_exp!]
+    _not: repos_bool_exp
+    _or: [repos_bool_exp!]
+    name: String_comparison_exp
+    packages: packages_bool_exp
+    packages_aggregate: packages_aggregate_bool_exp
 }
 
 """
 unique or primary key constraints on table "repos"
 """
 enum repos_constraint {
-  """
-  unique or primary key constraint on columns "name"
-  """
-  idx_16388_sqlite_autoindex_repos_1
+    """
+    unique or primary key constraint on columns "name"
+    """
+    idx_19061_sqlite_autoindex_repos_1
 }
 
 """
 input type for inserting data into table "repos"
 """
 input repos_insert_input {
-  name: String
-  packages: packages_arr_rel_insert_input
+    name: String
+    packages: packages_arr_rel_insert_input
 }
 
-"""aggregate max on columns"""
+"""
+aggregate max on columns
+"""
 type repos_max_fields {
-  name: String
+    name: String
 }
 
-"""aggregate min on columns"""
+"""
+aggregate min on columns
+"""
 type repos_min_fields {
-  name: String
+    name: String
 }
 
 """
 response of any mutation on the table "repos"
 """
 type repos_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
+    """
+    number of rows affected by the mutation
+    """
+    affected_rows: Int!
 
-  """data from the rows affected by the mutation"""
-  returning: [repos!]!
+    """
+    data from the rows affected by the mutation
+    """
+    returning: [repos!]!
 }
 
 """
 input type for inserting object relation for remote table "repos"
 """
 input repos_obj_rel_insert_input {
-  data: repos_insert_input!
+    data: repos_insert_input!
 
-  """upsert condition"""
-  on_conflict: repos_on_conflict
+    """
+    upsert condition
+    """
+    on_conflict: repos_on_conflict
 }
 
 """
 on_conflict condition type for table "repos"
 """
 input repos_on_conflict {
-  constraint: repos_constraint!
-  update_columns: [repos_update_column!]! = []
-  where: repos_bool_exp
+    constraint: repos_constraint!
+    update_columns: [repos_update_column!]! = []
+    where: repos_bool_exp
 }
 
-"""Ordering options when selecting data from "repos"."""
+"""
+Ordering options when selecting data from "repos".
+"""
 input repos_order_by {
-  name: order_by
-  packages_aggregate: packages_aggregate_order_by
+    name: order_by
+    packages_aggregate: packages_aggregate_order_by
 }
 
-"""primary key columns input for table: repos"""
+"""
+primary key columns input for table: repos
+"""
 input repos_pk_columns_input {
-  name: String!
+    name: String!
 }
 
 """
 select columns of table "repos"
 """
 enum repos_select_column {
-  """column name"""
-  name
+    """
+    column name
+    """
+    name
 }
 
 """
 input type for updating data in table "repos"
 """
 input repos_set_input {
-  name: String
+    name: String
 }
 
 """
 Streaming cursor of the table "repos"
 """
 input repos_stream_cursor_input {
-  """Stream column input with initial value"""
-  initial_value: repos_stream_cursor_value_input!
+    """
+    Stream column input with initial value
+    """
+    initial_value: repos_stream_cursor_value_input!
 
-  """cursor ordering"""
-  ordering: cursor_ordering
+    """
+    cursor ordering
+    """
+    ordering: cursor_ordering
 }
 
-"""Initial value of the column from where the streaming should start"""
+"""
+Initial value of the column from where the streaming should start
+"""
 input repos_stream_cursor_value_input {
-  name: String
+    name: String
 }
 
 """
 update columns of table "repos"
 """
 enum repos_update_column {
-  """column name"""
-  name
+    """
+    column name
+    """
+    name
 }
 
 input repos_updates {
-  """sets the columns of the filtered rows to the given values"""
-  _set: repos_set_input
+    """
+    sets the columns of the filtered rows to the given values
+    """
+    _set: repos_set_input
 
-  """filter the rows which have to be updated"""
-  where: repos_bool_exp!
+    """
+    filter the rows which have to be updated
+    """
+    where: repos_bool_exp!
 }
 
 type subscription_root {
-  """An array relationship"""
-  packages(
-    """distinct select on columns"""
-    distinct_on: [packages_select_column!]
+    """
+    An array relationship
+    """
+    packages(
+        """
+        distinct select on columns
+        """
+        distinct_on: [packages_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [packages_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [packages_order_by!]
 
-    """filter the rows returned"""
-    where: packages_bool_exp
-  ): [packages!]!
+        """
+        filter the rows returned
+        """
+        where: packages_bool_exp
+    ): [packages!]!
 
-  """An aggregate relationship"""
-  packages_aggregate(
-    """distinct select on columns"""
-    distinct_on: [packages_select_column!]
+    """
+    An aggregate relationship
+    """
+    packages_aggregate(
+        """
+        distinct select on columns
+        """
+        distinct_on: [packages_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [packages_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [packages_order_by!]
 
-    """filter the rows returned"""
-    where: packages_bool_exp
-  ): packages_aggregate!
+        """
+        filter the rows returned
+        """
+        where: packages_bool_exp
+    ): packages_aggregate!
 
-  """
-  fetch data from the table in a streaming manner: "packages"
-  """
-  packages_stream(
-    """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    """
+    fetch data from the table in a streaming manner: "packages"
+    """
+    packages_stream(
+        """
+        maximum number of rows returned in a single batch
+        """
+        batch_size: Int!
 
-    """cursor to stream the results returned by the query"""
-    cursor: [packages_stream_cursor_input]!
+        """
+        cursor to stream the results returned by the query
+        """
+        cursor: [packages_stream_cursor_input]!
 
-    """filter the rows returned"""
-    where: packages_bool_exp
-  ): [packages!]!
+        """
+        filter the rows returned
+        """
+        where: packages_bool_exp
+    ): [packages!]!
 
-  """
-  fetch data from the table: "repos"
-  """
-  repos(
-    """distinct select on columns"""
-    distinct_on: [repos_select_column!]
+    """
+    fetch data from the table: "repos"
+    """
+    repos(
+        """
+        distinct select on columns
+        """
+        distinct_on: [repos_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [repos_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [repos_order_by!]
 
-    """filter the rows returned"""
-    where: repos_bool_exp
-  ): [repos!]!
+        """
+        filter the rows returned
+        """
+        where: repos_bool_exp
+    ): [repos!]!
 
-  """
-  fetch aggregated fields from the table: "repos"
-  """
-  repos_aggregate(
-    """distinct select on columns"""
-    distinct_on: [repos_select_column!]
+    """
+    fetch aggregated fields from the table: "repos"
+    """
+    repos_aggregate(
+        """
+        distinct select on columns
+        """
+        distinct_on: [repos_select_column!]
 
-    """limit the number of rows returned"""
-    limit: Int
+        """
+        limit the number of rows returned
+        """
+        limit: Int
 
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+        """
+        skip the first n rows. Use only with order_by
+        """
+        offset: Int
 
-    """sort the rows by one or more columns"""
-    order_by: [repos_order_by!]
+        """
+        sort the rows by one or more columns
+        """
+        order_by: [repos_order_by!]
 
-    """filter the rows returned"""
-    where: repos_bool_exp
-  ): repos_aggregate!
+        """
+        filter the rows returned
+        """
+        where: repos_bool_exp
+    ): repos_aggregate!
 
-  """fetch data from the table: "repos" using primary key columns"""
-  repos_by_pk(name: String!): repos
+    """
+    fetch data from the table: "repos" using primary key columns
+    """
+    repos_by_pk(name: String!): repos
 
-  """
-  fetch data from the table in a streaming manner: "repos"
-  """
-  repos_stream(
-    """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    """
+    fetch data from the table in a streaming manner: "repos"
+    """
+    repos_stream(
+        """
+        maximum number of rows returned in a single batch
+        """
+        batch_size: Int!
 
-    """cursor to stream the results returned by the query"""
-    cursor: [repos_stream_cursor_input]!
+        """
+        cursor to stream the results returned by the query
+        """
+        cursor: [repos_stream_cursor_input]!
 
-    """filter the rows returned"""
-    where: repos_bool_exp
-  ): [repos!]!
+        """
+        filter the rows returned
+        """
+        where: repos_bool_exp
+    ): [repos!]!
 }
-

@@ -1,57 +1,57 @@
 name: "Project Sync Run"
 
 on:
-  workflow_dispatch:
-    inputs:
-      sync:
-        description: 'Dump DB'
-        required: true
-        default: false
-        type: boolean
-  schedule:
-    - cron: '0 */12 * * *'
+    workflow_dispatch:
+        inputs:
+            sync:
+                description: "Dump DB"
+                required: true
+                default: false
+                type: boolean
+    schedule:
+        - cron: "0 */12 * * *"
 
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v2
-        - name: Installing Rust
-          uses: actions-rust-lang/setup-rust-toolchain@v1
-        - uses: ankane/setup-postgres@v1
-          with:
-            postgres-version: 15
-        - name: Download PKG Databases
-          run: ./scripts/get_pkgs.sh
-        - name: Init Local Database
-          run: ./scripts/init_db.sh
-        - name: Building with Cargo
-          uses: actions-rs/cargo@v1
-          with:
-            command: build
-            args: --release
-        - name: Run DBGen Parse
-          run: cargo run --release --bin dbgen
-        - name: Run AUR Parser
-          run: cargo run --release --bin aurparser
-        - name: Index Local Database
-          run: ./scripts/index_db.sh
-        - name: DB Clean Up
-          run: |
-            psql -d ${{ secrets.PG_CONNECTION_STRING }} -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
-        - name: Run Additional Scripts
-          run: |
-            curl https://github.com/Roxedus/Pgloader-bin/releases/download/ec8f41d/pgloader -L -o pgloader
-            chmod +x pgloader
-            ./pgloader sqlite://db/local.db ${{ secrets.PG_CONNECTION_STRING }} >/dev/null 2>&1
-        - name: Sync Hasura Metadata
-          run: |
-            ./scripts/hasura_sync.sh ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}      
-        - uses: actions/upload-artifact@v4
-          if: ${{ github.event.inputs.sync == 'true' }}
-          name: Upload DB
-          with:
-            name: localdbs
-            path: |
-              **/local.db
-              db/local.db
+            - uses: actions/checkout@v2
+            - name: Installing Rust
+              uses: actions-rust-lang/setup-rust-toolchain@v1
+            - uses: ankane/setup-postgres@v1
+              with:
+                  postgres-version: 15
+            - name: Download PKG Databases
+              run: ./scripts/get_pkgs.sh
+            - name: Init Local Database
+              run: ./scripts/init_db.sh
+            - name: Building with Cargo
+              uses: actions-rs/cargo@v1
+              with:
+                  command: build
+                  args: --release
+            - name: Run DBGen Parse
+              run: cargo run --release --bin dbgen
+            - name: Run AUR Parser
+              run: cargo run --release --bin aurparser
+            - name: Index Local Database
+              run: ./scripts/index_db.sh
+            - name: DB Clean Up
+              run: |
+                  psql -d ${{ secrets.PG_CONNECTION_STRING }} -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
+            - name: Run Additional Scripts
+              run: |
+                  curl https://github.com/Roxedus/Pgloader-bin/releases/download/ec8f41d/pgloader -L -o pgloader
+                  chmod +x pgloader
+                  ./pgloader sqlite://db/local.db ${{ secrets.PG_CONNECTION_STRING }} >/dev/null 2>&1
+            - name: Sync Hasura Metadata
+              run: |
+                  ./scripts/hasura_sync.sh ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+            - uses: actions/upload-artifact@v4
+              if: ${{ github.event.inputs.sync == 'true' }}
+              name: Upload DB
+              with:
+                  name: localdbs
+                  path: |
+                      **/local.db
+                      db/local.db

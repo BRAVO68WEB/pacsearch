@@ -1,0 +1,5 @@
+apps/pacsearch-app/.next
+node_modules
+target
+apps/pacsearch-app/node_modules
+.turbo
