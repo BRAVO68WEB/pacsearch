@@ -11,16 +11,16 @@ function PackageList() {
 
     useEffect(() => {
         async function fetchData() {
-          const newData = await getRepoPackages(repo_name, searchPkgName, {
-            perPage,
-            pageNumber,
-          });
-          setData(newData);
-          setTotalPackages(newData.packages_aggregate.aggregate.count);
+            const newData = await getRepoPackages(repo_name, searchPkgName, {
+                perPage,
+                pageNumber,
+            });
+            setData(newData);
+            setTotalPackages(newData.packages_aggregate.aggregate.count);
         }
         fetchData();
     }, [repo_name, searchPkgName, pageNumber, perPage]);
-    
+
     return <>{data && <PackageRender data={data} />}</>;
 }
 

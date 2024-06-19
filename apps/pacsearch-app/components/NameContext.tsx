@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 interface IRepoNameContextType {
     name: string | null;
@@ -16,15 +16,15 @@ interface IRepoNameContextType {
 }
 const repoNameContext = createContext<IRepoNameContextType>({
     name: null,
-    setName: () => {}, 
-    searchPkgName: null, 
-    setSearchPkgName: () => {}, 
-    pageNumber: 1, 
-    setPageNumber: () => {}, 
-    perPage: 25, 
+    setName: () => {},
+    searchPkgName: null,
+    setSearchPkgName: () => {},
+    pageNumber: 1,
+    setPageNumber: () => {},
+    perPage: 25,
     setPerPage: () => {},
     totalPackages: 0,
-    setTotalPackages: () => {}
+    setTotalPackages: () => {},
 });
 
 interface NameContextProps {
@@ -36,20 +36,20 @@ function NameContext({ children }: Readonly<NameContextProps>) {
     const [perPage, setPerPage] = useState<number>(25);
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [totalPackages, setTotalPackages] = useState<number>(0);
-    
+
     return (
-        <repoNameContext.Provider 
-            value={{ 
-                name, 
-                setName, 
-                searchPkgName, 
-                setSearchPkgName, 
-                perPage, 
-                setPerPage, 
-                pageNumber, 
+        <repoNameContext.Provider
+            value={{
+                name,
+                setName,
+                searchPkgName,
+                setSearchPkgName,
+                perPage,
+                setPerPage,
+                pageNumber,
                 setPageNumber,
                 totalPackages,
-                setTotalPackages
+                setTotalPackages,
             }}
         >
             {children}
