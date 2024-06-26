@@ -31,7 +31,7 @@ export default function Home() {
                             <SearchBar />
                             <Pagination />
                         </div>
-                        <div className="flex-1 w-full overflow-y-auto">
+                        <div className="flex-1 w-full overflow-y-auto px-10">
                             <PackageList />
                         </div>
                     </div>
