@@ -49,7 +49,7 @@ function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map(header => (
-                                <th key={header.id}>
+                                <th className="w-1/4 text-left p-3" key={header.id}>
                                     {header.isPlaceholder
                                         ? null
                                         : flexRender(
@@ -61,11 +61,11 @@ function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
                         </tr>
                     ))}
                 </thead>
-                <tbody className="border-collapse border border-blue-400 p-5">
+                <tbody className="border-collapse border border-blue-400 p-5 text-lg">
                     {table.getRowModel().rows.map(row => (
-                        <tr key={row.id} className="border-collapse border border-blue-400 p-5">
+                        <tr key={row.id} className="border-collapse border border-blue-400">
                             {row.getVisibleCells().map(cell => (
-                                <td key={cell.id}>
+                                <td className="p-3 text-start align-top" key={cell.id}>
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                 </td>
                             ))}

@@ -10,7 +10,7 @@ export default function Home() {
     return (
         <NameContext>
             <div className="font-sans h-screen w-screen overflow-hidden">
-                <div className="flex w-full gap-16">
+                <div className="flex w-full">
                     <div className="flex w-1/6 h-screen border-r-2 border-sky-500 flex-col items-center justify-items-center">
                         <div className="logo w-full bg-white/10">
                             <h1 className="items-center justify-items-center text-2xl p-5">
@@ -26,12 +26,14 @@ export default function Home() {
                             <RepoList />
                         </div>
                     </div>
-                    <div className="flex flex-1 gap-4 flex-col border-sky-500 border-2">
-                        <div className="flex justify-between items-center p-2">
+                    <div className="flex h-screen overflow-hidden flex-1 gap-4 flex-col ">
+                        <div className="flex justify-between items-center p-2 px-10 bg-white/10">
                             <SearchBar />
                             <Pagination />
                         </div>
-                        <PackageList />
+                        <div className="flex-1 w-full overflow-y-auto">
+                            <PackageList />
+                        </div>
                     </div>
                 </div>
             </div>
