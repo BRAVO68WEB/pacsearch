@@ -28,34 +28,30 @@ function RepoRender({ data }: Readonly<{ data: IRepoListData }>) {
     });
 
     return (
-        <div className="flex flex-col border-solid border-cyan-500 w-auto p-6">
-            <table className="table-auto border-collapse border border-blue-400 p-5">
-                <tbody className="border-collapse border border-blue-400 p-5 text-center items-center justify-items-center">
-                    {table.getRowModel().rows.map(row => (
-                        <tr key={row.id} className="border-collapse border border-blue-400 p-5">
-                            {row.getVisibleCells().map(cell => (
-                                <td
-                                    key={cell.id}
-                                    onClick={() => {
-                                        if (cell.row.original.name === name) {
-                                            setName("");
-                                            return;
-                                        }
-                                        setName(cell.row.original.name);
-                                    }}
-                                    className={
-                                        cell.row.original.name === name
-                                            ? "bg-blue-500 text-white"
-                                            : "bg-black"
-                                    }
-                                >
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                </td>
-                            ))}
-                        </tr>
+        <div className="flex flex-col border-solid w-full">
+            {table.getRowModel().rows.map(row => (
+                <div key={row.id} className="border-collapse border-y border-blue-400 hover:bg-blue-400 cursor-pointer p-5">
+                    {row.getVisibleCells().map(cell => (
+                        <div
+                            key={cell.id}
+                            onClick={() => {
+                                if (cell.row.original.name === name) {
+                                    setName("");
+                                    return;
+                                }
+                                setName(cell.row.original.name);
+                            }}
+                            // className={
+                            //     cell.row.original.name === name
+                            //         ? "bg-blue-500 text-white"
+                            //         : "bg-black"
+                            // }
+                        >
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </div>
                     ))}
-                </tbody>
-            </table>
+                </div>
+            ))}
         </div>
     );
 }

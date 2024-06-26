@@ -35,7 +35,7 @@ function Pagination() {
                 ]}
                 valueField="value"
                 labelField="label"
-                className="border-2 border-blue-500 text-white p-3"
+                className="border-2 border-blue-500 text-white p-3 h-full px-8"
                 color="#3182ce"
                 onChange={values => setPerPage(values[0].value)}
             />

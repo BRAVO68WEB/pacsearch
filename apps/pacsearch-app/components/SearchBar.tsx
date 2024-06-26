@@ -1,16 +1,24 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRepoName } from "./NameContext";
+import useDebounce from "@/libs/debounce";
+import { Search } from "lucide-react";
 
 function SearchBar() {
     const { setSearchPkgName } = useRepoName();
+
+    const search = useDebounce(async (input: string) => {
+        setSearchPkgName(input);
+    });
+
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center w-full max-w-lg">
+            <label className="text-white p-3 flex items-center justify-center bg-blue-500 px-4"><Search className="h-6 w-6" /></label>
             <input
-                className="border-2 border-blue-500 text-black text-lg p-3"
+                className="border-2 bg-transparent text-white border-blue-500 text-lg p-3 px-4 w-full       focus-visible:outline-none"
                 type="text"
                 placeholder="Search for a package"
-                onChange={e => setSearchPkgName(e.target.value)}
+                onChange={e => search(e.target.value)}
             />
         </div>
     );

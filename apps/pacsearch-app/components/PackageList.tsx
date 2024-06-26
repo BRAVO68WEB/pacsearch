@@ -19,7 +19,7 @@ function PackageList() {
             setTotalPackages(newData.packages_aggregate.aggregate.count);
         }
         fetchData();
-    }, [repo_name, searchPkgName, pageNumber, perPage]);
+    }, [repo_name, searchPkgName, pageNumber, perPage, setTotalPackages]);
 
     return <>{data && <PackageRender data={data} />}</>;
 }
