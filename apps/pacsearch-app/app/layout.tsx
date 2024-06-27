@@ -50,7 +50,7 @@ export const metadata: Metadata = {
             sizes: "32x32",
             type: "image/png",
         },
-    ]
+    ],
 };
 
 export default function RootLayout({
@@ -61,9 +61,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-              <link rel="icon" href="https://pacsearch-assets.b68.dev/favicon.ico" sizes="any" />
+                <link rel="icon" href="https://pacsearch-assets.b68.dev/favicon.ico" sizes="any" />
             </head>
-            <body className={kanit.className}>{children}</body>
+            <body className={`${kanit.className} bg-rp-moon-base`}>{children}</body>
         </html>
     );
 }

@@ -29,3 +29,8 @@ body {
     color: var(--background);
     background: var(--foreground);
 }
+
+.react-dropdown-select {
+    border-color: rgb(68 65 90) !important;
+    padding: auto 30px !important;
+}

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import rosepineTheme from "./theme/rosepine";
 
 const config: Config = {
     content: [
@@ -9,8 +10,8 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                background: "var(--background)",
-                foreground: "var(--foreground)",
+                // background: "var(--background)",j
+                // foreground: "var(--foreground)",
             },
             fontFamily: {
                 sans: ["var(--font-geist-sans)"],
@@ -19,5 +20,6 @@ const config: Config = {
         },
     },
     plugins: [],
+    presets: [rosepineTheme],
 };
 export default config;
