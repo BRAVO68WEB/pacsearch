@@ -30,7 +30,7 @@ function RepoRender({ data }: Readonly<{ data: IRepoListData }>) {
     return (
         <div className="flex flex-col border-solid w-full">
             {table.getRowModel().rows.map(row => (
-                <div key={row.id} className="border-collapse border-y border-blue-400 hover:bg-blue-400 cursor-pointer p-5">
+                <div key={row.id} className="border-collapse border-t hover:bg-rp-moon-highlight-med border-rp-moon-muted cursor-pointer p-5">
                     {row.getVisibleCells().map(cell => (
                         <div
                             key={cell.id}

@@ -15,7 +15,7 @@ function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
         columnHelper.accessor("name", {
             cell: info => {
                 return (
-                    <Link href={`/${info.row.original.repo}/${info.row.original.name}`}>
+                    <Link href={`/${info.row.original.repo}/${info.row.original.name}`} className="text-rp-moon-iris">
                         {info.getValue()}
                     </Link>
                 );
@@ -44,7 +44,7 @@ function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
 
     return (
         <div className="flex flex-col p-2">
-            <table className="table-auto border-collapse border border-blue-400 p-5">
+            <table className="table-auto border-collapse border border-rp-moon-subtle p-5">
                 <thead>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
@@ -61,9 +61,9 @@ function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
                         </tr>
                     ))}
                 </thead>
-                <tbody className="border-collapse border border-blue-400 p-5 text-lg">
+                <tbody className="border-collapse border border-rp-moon-subtle p-5 text-lg">
                     {table.getRowModel().rows.map(row => (
-                        <tr key={row.id} className="border-collapse border border-blue-400">
+                        <tr key={row.id} className="border-collapse border border-rp-moon-subtle hover:bg-rp-base">
                             {row.getVisibleCells().map(cell => (
                                 <td className="p-3 text-start align-top" key={cell.id}>
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

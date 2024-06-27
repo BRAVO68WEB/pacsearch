@@ -57,13 +57,13 @@ export default function Page({ params }: Readonly<{ params: { repo: string; pkg:
     return (
         <NameContext>
             <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
-                <div className="flex gap-16 flex-row sm:flex-row">
-                    <div className="flex flex-col items-center justify-items-center">
-                        <div className="items-center justify-items-center text-2xl pt-2">
+                <div className="flex flex-col gap-16 ">
+                    <div className="flex flex-col justify-items-center">
+                        <div className="items-center justify-items-center text-2xl pt-2 text-rp-moon-iris">
                             <Link href={`/`}>&#8592; Go back</Link>
                         </div>
                     </div>
-                    <div className="flex gap-4 flex-col border-sky-500 border-2">
+                    <div className="flex gap-4 flex-col border-rp-moon-subtle border-2">
                         <PackageInfo repoName={params.repo} pkgName={params.pkg} />
                     </div>
                 </div>
