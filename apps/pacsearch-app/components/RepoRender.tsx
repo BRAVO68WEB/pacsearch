@@ -41,11 +41,6 @@ function RepoRender({ data }: Readonly<{ data: IRepoListData }>) {
                                 }
                                 setName(cell.row.original.name);
                             }}
-                            // className={
-                            //     cell.row.original.name === name
-                            //         ? "bg-blue-500 text-white"
-                            //         : "bg-black"
-                            // }
                         >
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </div>
