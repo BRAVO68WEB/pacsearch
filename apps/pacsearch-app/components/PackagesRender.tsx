@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { IRepoPkgsData, IMiniPkgInfoData } from "@/libs/get_packages";
 import Link from "next/link";
+import { getRepoColor, getRepoColorTag } from "@/helpers/repoColorTags";
 
 function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
     const columnHelper = createColumnHelper<IMiniPkgInfoData>();
@@ -31,7 +32,17 @@ function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
             footer: info => info.column.id,
         }),
         columnHelper.accessor("repo", {
-            cell: info => info.getValue(),
+            cell: info => {
+                return <div
+                        className={`
+                            ${getRepoColorTag(info.getValue())}
+                            ${getRepoColor(info.getValue())}
+                            p-2 rounded-md text-rp-moon-base
+                        `}
+                    >
+                    {info.getValue()}
+                </div>
+            },
             footer: info => info.column.id,
         }),
     ];
@@ -65,7 +76,12 @@ function PackageRender({ data }: Readonly<{ data: IRepoPkgsData }>) {
                     {table.getRowModel().rows.map(row => (
                         <tr key={row.id} className="border-collapse border border-rp-moon-subtle hover:bg-rp-base">
                             {row.getVisibleCells().map(cell => (
-                                <td className="p-3 text-start align-top" key={cell.id}>
+                                <td 
+                                    className={`
+                                        p-3 text-start align-top
+                                    `}
+                                    key={cell.id}
+                                >
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                 </td>
                             ))}

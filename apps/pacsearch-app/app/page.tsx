@@ -32,7 +32,7 @@ export default function Home() {
                             </Link>
                         </div>
                         <div className="flex flex-col items-center justify-items-center">
-                            <h3 className="items-center justify-items-center p-1">
+                            <h3 className="items-center justify-items-center p-1 text-2xl">
                                 Repo List
                             </h3>
                         </div>

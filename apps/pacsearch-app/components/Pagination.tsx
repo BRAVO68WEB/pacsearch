@@ -35,12 +35,12 @@ function Pagination() {
                 ]}
                 valueField="value"
                 labelField="label"
-                className="border-2 border-rp-moon-highlight-med text-white p-3 h-full px-8"
+                className="border-2 border-rp-moon-highlight-med text-white p-3 h-full px-8 bg-rp-moon-highlight-med"
                 color="#3182ce"
                 onChange={values => setPerPage(values[0].value)}
             />
             <button
-                className="border border-rp-moon-highlight-med text-white p-3"
+                className="border border-rp-moon-highlight-med text-white p-3 bg-rp-moon-highlight-med"
                 onClick={() => {
                     // if pageNumber is 1, do nothing
                     if (pageNumber === 1) return;
@@ -49,11 +49,11 @@ function Pagination() {
             >
                 Previous
             </button>
-            <span className="border border-rp-highlight-med text-white p-3">
+            <span className="border border-rp-highlight-med text-white p-3 bg-rp-moon-highlight-med">
                 {pageNumber}/{totalPages}
             </span>
             <button
-                className="border border-rp-highlight-med text-white p-3"
+                className="border border-rp-highlight-med text-white p-3 bg-rp-moon-highlight-med"
                 onClick={() => {
                     // if pageNumber is the last page, do nothing
                     if (pageNumber === totalPages) return;
@@ -62,7 +62,7 @@ function Pagination() {
             >
                 Next
             </button>
-            <span className="border border-rp-highlight-med text-white p-3">
+            <span className="border border-rp-highlight-med text-white p-3 bg-rp-moon-highlight-med">
                 Total Packages: {totalPackages}
             </span>
         </div>

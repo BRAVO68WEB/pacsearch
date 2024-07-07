@@ -1,6 +1,7 @@
 "use client";
 
 import { IRepoData, IRepoListData } from "@/libs/get_repos";
+import { getRepoColor, getRepoColorTag } from "@/helpers/repoColorTags";
 import { useRepoName } from "./NameContext";
 import {
     createColumnHelper,
@@ -30,7 +31,9 @@ function RepoRender({ data }: Readonly<{ data: IRepoListData }>) {
     return (
         <div className="flex flex-col border-solid w-full">
             {table.getRowModel().rows.map(row => (
-                <div key={row.id} className="border-collapse border-t hover:bg-rp-moon-highlight-med border-rp-moon-muted cursor-pointer p-5">
+                <div key={row.id} className={`border-collapse border-t border-rp-moon-muted cursor-pointer p-5
+                    ${row.getVisibleCells().some(cell => cell.row.original.name === name) ? "bg-rp-moon-text" : ""}
+                `}>
                     {row.getVisibleCells().map(cell => (
                         <div
                             key={cell.id}
@@ -41,6 +44,11 @@ function RepoRender({ data }: Readonly<{ data: IRepoListData }>) {
                                 }
                                 setName(cell.row.original.name);
                             }}
+                            className={`${
+                                getRepoColor(cell.row.original.name)}
+                                p-2 rounded-md text-rp-moon-base
+                                ${cell.row.original.name === name ? "bg-rp-moon-text" : ""}
+                            `}
                         >
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </div>

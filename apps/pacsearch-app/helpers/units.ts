@@ -1,4 +1,6 @@
-export const bytesToibytes = (bytes: number): string => {
+export const bytesToibytes = (bytes: number | string): string => {
+    bytes = typeof bytes === "string" ? parseInt(bytes) : bytes;
+    if (isNaN(bytes)) return "0 B";
     if (bytes === 0) return "0 B";
     const k = 1024;
     const sizes = ["B", "KiB", "MiB", "GiB", "TiB"];
