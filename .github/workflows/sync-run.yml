@@ -46,7 +46,7 @@ jobs:
                   ./pgloader sqlite://db/local.db ${{ secrets.PG_CONNECTION_STRING }} >/dev/null 2>&1
             - name: Sync Hasura Metadata
               run: |
-                  ./scripts/hasura_sync.sh ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+                  ./scripts/hasura_sync.gh.sh ${{ secrets.HASURA_GRAPHQL_METADATA_URL }} ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
             - uses: actions/upload-artifact@v4
               if: ${{ github.event.inputs.sync == 'true' }}
               name: Upload DB
