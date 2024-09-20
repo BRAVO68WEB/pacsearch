@@ -46,8 +46,8 @@ function RepoRender({ data }: Readonly<{ data: IRepoListData }>) {
                             }}
                             className={`${
                                 getRepoColor(cell.row.original.name)}
-                                p-2 rounded-md text-rp-moon-base
-                                ${cell.row.original.name === name ? "bg-rp-moon-text" : ""}
+                                p-2 rounded-md text-rp-moon-text
+                                ${cell.row.original.name === name ? "bg-rp-moon-base" : ""}
                             `}
                         >
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -63,7 +63,7 @@ export default function Page({ params }: Readonly<{ params: { repo: string; pkg:
                             <Link href={`/`}>&#8592; Go back</Link>
                         </div>
                     </div>
-                    <div className="flex gap-4 flex-col border-rp-moon-subtle border-2">
+                    <div className="flex gap-4 flex-col border-rp-moon-subtle">
                         <PackageInfo repoName={params.repo} pkgName={params.pkg} />
                     </div>
                 </div>

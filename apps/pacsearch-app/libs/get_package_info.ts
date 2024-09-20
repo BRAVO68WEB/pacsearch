@@ -1,32 +1,31 @@
 import { query } from "@/helpers/ApolloClient";
 import { gql } from "@apollo/client";
 
+export interface IPkgInfo {
+    arch: string;
+    base: string;
+    build_date: string;
+    compressed_size: number;
+    conflicts: string;
+    description: string;
+    file_name: string;
+    groups: string;
+    home_url: string;
+    installed_size: number;
+    license: string;
+    md5_sum: string;
+    name: string;
+    packager: string;
+    pgp_signature: string;
+    provides: string;
+    replaces: string;
+    repo: string;
+    sha256_sum: string;
+    version: string;
+    download_url: string;
+}
 export interface IPkgInfoData {
-    packages: [
-        {
-            arch: string;
-            base: string;
-            build_date: string;
-            compressed_size: number;
-            conflicts: string;
-            description: string;
-            file_name: string;
-            groups: string;
-            home_url: string;
-            installed_size: number;
-            license: string;
-            md5_sum: string;
-            name: string;
-            packager: string;
-            pgp_signature: string;
-            provides: string;
-            replaces: string;
-            repo: string;
-            sha256_sum: string;
-            version: string;
-            download_url: string;
-        },
-    ];
+    packages: IPkgInfo[];
 }
 
 const getPackageInfo = async ({
