@@ -12,22 +12,22 @@ export function PackageInfoCard({
   props: IPkgInfo
 }>) {
   return (
-    <Card className="w-full max-w-3xl bg-slate-900 text-slate-100">
+    <Card className="w-full max-w-5xl bg-slate-900 text-slate-100">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div>
-            <CardTitle className="text-2xl font-bold">
+            <CardTitle className="text-2xl 2xl:text-3xl font-bold">
               {props.name}
             </CardTitle>
-            <CardDescription className="text-slate-400">
+            <CardDescription className="text-slate text-lg">
               {props.version}
             </CardDescription>
           </div>
-          <Badge variant="secondary" className="bg-slate-700 text-slate-100">
+          <Badge variant="secondary" className="bg-slate-700 text-slate-100 text-lg" >
             {props.license}
           </Badge>
         </div>
-        <p className="mt-2 text-sm text-slate-300">
+        <p className="mt-2 text-slate-300">
           {props.description}
         </p>
       </CardHeader>
@@ -80,8 +80,8 @@ export function PackageInfoCard({
 function InfoItem({ label, value, className }: { label: string; value: React.ReactNode; className?: string }) {
   return (
     <div className={className}>
-      <dt className="text-sm font-medium text-slate-400">{label}</dt>
-      <dd className="mt-1 text-sm text-slate-100">{value}</dd>
+      <dt className="text font-medium text-slate-400">{label}</dt>
+      <dd className="mt-1 text text-slate-100">{value}</dd>
     </div>
   )
 }
