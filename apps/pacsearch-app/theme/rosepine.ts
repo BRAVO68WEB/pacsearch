@@ -1,6 +1,9 @@
+import colors from "tailwindcss/colors";
+
 const rosepineTheme = {
     theme: {
         colors: {
+            ...colors,
             rp: {
                 base: "#191724",
                 surface: "#1f1d2e",

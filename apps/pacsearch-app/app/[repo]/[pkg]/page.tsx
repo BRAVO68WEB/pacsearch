@@ -56,10 +56,10 @@ export async function generateMetadata(
 export default function Page({ params }: Readonly<{ params: { repo: string; pkg: string } }>) {
     return (
         <NameContext>
-            <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
-                <div className="flex flex-col gap-16 ">
+            <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20 sm:pt-8">
+                <div className="flex flex-col gap-12 ">
                     <div className="flex flex-col justify-items-center">
-                        <div className="items-center justify-items-center text-2xl pt-2 text-rp-moon-iris">
+                        <div className="items-center justify-items-center text-2xl text-rp-moon-iris">
                             <Link href={`/`}>&#8592; Go back</Link>
                         </div>
                     </div>

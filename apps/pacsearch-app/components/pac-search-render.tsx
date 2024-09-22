@@ -16,19 +16,12 @@ export default function PacSearchRender(
 ) {
   return (
     <PacSearch
-        currentPage={0}
-        setCurrentPage={() => {}}
         packages={packages}
         perPage={25}
         setPerPage={() => {}}
-        searchQuery={""}
-        setSearchQuery={() => {}}
         repos={repos}
         setRepos={() => {}}
-        selectedRepo={""}
         setSelectedRepo={() => {}}
-        totalPages={0}
-        totalPackages={0}
     />
   )
 }
