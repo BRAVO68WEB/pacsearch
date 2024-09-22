@@ -61,6 +61,13 @@ export function PacSearch({
                 <nav>
                     <h2 className="text-lg font-semibold mb-2 2xl:text-xl">Repo List</h2>
                     <ScrollArea className="h-[calc(100vh-120px)] pr-4">
+                        <Button
+                            variant={"" === name ? "secondary" : "ghost"}
+                            className="w-full justify-start mb-1 2xl:text-lg"
+                            onClick={() => setName("")}
+                        >
+                            All
+                        </Button>
                         {repos.map(repo => (
                             <Button
                                 key={repo.name}
