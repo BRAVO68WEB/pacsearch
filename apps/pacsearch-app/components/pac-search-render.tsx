@@ -16,7 +16,7 @@ export default function PacSearchRender(
 ) {
   return (
     <PacSearch
-        packages={packages}
+        // packages={packages}
         perPage={25}
         setPerPage={() => {}}
         repos={repos}

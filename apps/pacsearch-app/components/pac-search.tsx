@@ -27,12 +27,12 @@ import { useRepoName } from "./NameContext";
 export function PacSearch({
     repos,
     setRepos,
-    packages,
+    // packages,
 }: Readonly<{
     repos: IRepoData[];
     setRepos: React.Dispatch<React.SetStateAction<IRepoData[]>>;
     setSelectedRepo: React.Dispatch<React.SetStateAction<string>>;
-    packages: IMiniPkgInfoData[];
+    // packages: IMiniPkgInfoData[];
     perPage: number;
     setPerPage: React.Dispatch<React.SetStateAction<number>>;
 }>) {
@@ -46,6 +46,7 @@ export function PacSearch({
         setPageNumber,
         setSearchPkgName,
         totalPackages,
+        packages,
     } = useRepoName();
 
     const totalPages = Math.ceil(totalPackages / perPage);
@@ -84,8 +85,14 @@ export function PacSearch({
                         />
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                     </div>
-                    <Select defaultValue="25">
-                        <SelectTrigger className="w-[100px]">
+                    <Select
+                        value={String(perPage)}
+                        onValueChange={val => {
+                            setPerPage(Number(val));
+                        }}
+                        defaultValue="25"
+                    >
+                        <SelectTrigger value={String(perPage)} className="w-[100px]">
                             <SelectValue placeholder="Per page" />
                         </SelectTrigger>
                         <SelectContent>
@@ -138,19 +145,24 @@ export function PacSearch({
                             variant="outline"
                             size="icon"
                             disabled={pageNumber === 1}
-                            onClick={() => setPageNumber(pageNumber - 1)}
+                            onClick={() => {
+                                if (pageNumber > 1) setPageNumber(pageNumber - 1);
+                            }}
                         >
                             <ArrowLeft className="h-4 w-4" />
                         </Button>
                         <div className="text-sm">
-                            Page <span className="font-medium">{pageNumber}</span> of{" "}
-                            <span className="font-medium">{totalPages}</span>
+                            Page <span className="font-medium">{pageNumber}</span>
+                            {/* of{" "} */}
+                            {/* <span className="font-medium">{totalPages}</span> */}
                         </div>
                         <Button
                             variant="outline"
                             size="icon"
-                            disabled={pageNumber === totalPages}
-                            onClick={() => setPageNumber(pageNumber + 1)}
+                            disabled={packages.length !== perPage}
+                            onClick={() => {
+                                if (packages.length == perPage) setPageNumber(pageNumber + 1);
+                            }}
                         >
                             <ArrowRight className="h-4 w-4" />
                         </Button>
