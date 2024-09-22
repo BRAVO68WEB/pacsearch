@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
 import "./globals.css";
+import NameContext from "@/components/NameContext";
+import getRepoPackages from "@/libs/get_packages";
 
 const kanit = Kanit({
     subsets: ["latin"],
@@ -53,17 +55,23 @@ export const metadata: Metadata = {
     ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const packages = await getRepoPackages(null, null, {
+        perPage: 50,
+        pageNumber: 1,
+    });
     return (
         <html lang="en">
             <head>
                 <link rel="icon" href="https://pacsearch-assets.b68.dev/favicon.ico" sizes="any" />
             </head>
-            <body className={`${kanit.className} bg-rp-moon-base`}>{children}</body>
+            <body className={`${kanit.className} bg-rp-moon-base`}>
+                <NameContext pkgData={packages}>{children}</NameContext>
+            </body>
         </html>
     );
 }

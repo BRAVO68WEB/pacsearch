@@ -4,22 +4,11 @@ import getRepoPackages from "@/libs/get_packages";
 import getDataRepo from "@/libs/get_repos";
 
 const repos = await getDataRepo();
-const packages = await getRepoPackages(
-    null,
-    null,
-    {
-        perPage: 50,
-        pageNumber: 1,
-    }
-);
+const packages = await getRepoPackages(null, null, {
+    perPage: 50,
+    pageNumber: 1,
+});
 
 export default async function Home() {
-    return (
-        <NameContext>
-            <PacSearchRender 
-                repos={repos.repos}
-                packages={packages.packages}
-            />
-        </NameContext>
-    );
+    return <PacSearchRender repos={repos.repos} packages={packages.packages} />;
 }
