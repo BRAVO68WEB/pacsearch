@@ -1,4 +1,4 @@
-import PacSearchRender from "@/components/pac-search-render";
+import PacSearchRender from "@/components/PacSearchRender";
 import getDataRepo from "@/libs/get_repos";
 
 const repos = await getDataRepo();

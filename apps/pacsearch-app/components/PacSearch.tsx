@@ -1,7 +1,18 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
+import { ArrowLeft, ArrowRight, Github, Search } from "lucide-react";
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import {
     Table,
     TableBody,
@@ -10,19 +21,10 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search, Github, FileText, ArrowLeft, ArrowRight } from "lucide-react";
-import { IRepoData } from "@/libs/get_repos";
-import Link from "next/link";
-import { useRepoName } from "./NameContext";
 import useDebounce from "@/libs/debounce";
+import { IRepoData } from "@/libs/get_repos";
+
+import { useRepoName } from "./NameContext";
 
 export function PacSearch({
     repos,
@@ -82,10 +84,12 @@ export function PacSearch({
                             </Button>
                         ))}
                         <Button
-                            variant="outline" 
+                            variant="outline"
                             className="w-full justify-start mb-1 2xl:text-lg"
                             onClick={() => {
-                                window.open("https://github.com/BRAVO68WEB/pacsearch/issues/new?title=[REQUEST]%20Add%20a%20missing%20AUR%20Repo&labels=request&assignees=BRAVO68WEB")
+                                window.open(
+                                    "https://github.com/BRAVO68WEB/pacsearch/issues/new?title=[REQUEST]%20Add%20a%20missing%20AUR%20Repo&labels=request&assignees=BRAVO68WEB",
+                                );
                             }}
                         >
                             Missing Repo?
@@ -138,7 +142,7 @@ export function PacSearch({
                     </TableHeader>
                     <TableBody className="text-lg 2xl:text-xl">
                         {packages.map(pkg => (
-                            <TableRow key={pkg.name + "-" +pkg.repo}>
+                            <TableRow key={pkg.name + "-" + pkg.repo}>
                                 <TableCell>
                                     <Link
                                         href={`/${pkg.repo}/${pkg.name}`}

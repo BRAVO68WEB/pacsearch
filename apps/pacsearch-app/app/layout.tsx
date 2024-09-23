@@ -1,6 +1,8 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
-import "./globals.css";
+
 import NameContext from "@/components/NameContext";
 import getRepoPackages from "@/libs/get_packages";
 

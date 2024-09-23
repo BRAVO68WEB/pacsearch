@@ -1,17 +1,22 @@
 {
     "name": "pacsearch",
-    "version": "1.0.0",
-    "description": "",
-    "license": "ISC",
-    "author": "",
-    "main": "index.js",
+    "version": "0.0.0",
+    "license": "MIT",
+    "author": {
+        "name": "BRAVO68WEB",
+        "email": "hi@b68.dev",
+        "url": "https://b68.dev"
+    },
     "scripts": {
         "build": "turbo build",
         "dev": "turbo dev",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "lint": "eslint --ext .ts,.tsx --fix ."
     },
     "devDependencies": {
+        "@bravo68web/eslint-config": "^1.2.5",
         "@bravo68web/prettier-config": "^1.2.4",
+        "eslint": "^8.57.1",
         "graphqurl": "^1.0.3",
         "prettier": "^3.3.2",
         "turbo": "^2.0.3"

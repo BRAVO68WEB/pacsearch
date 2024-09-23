@@ -35,7 +35,7 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: "https://pacsearch-assets.b68.dev/favicon-32x32.png",
                 sizes: "32x32",
                 type: "image/png",
-            },  
+            },
         ],
     };
 }

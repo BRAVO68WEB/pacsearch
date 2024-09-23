@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import PackageInfo from "@/components/PackageInfo";
-
 import getPkgsInfo from "@/libs/get_package_info";
-
-import Link from "next/link";
 
 type Props = {
     params: {
@@ -13,9 +11,7 @@ type Props = {
     };
 };
 
-export async function generateMetadata(
-    { params }: Props,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const pkg = params.pkg;
     const repo = params.repo;
 
@@ -23,7 +19,7 @@ export async function generateMetadata(
 
     if (!pkgData.packages[0]) {
         return {
-            title: `No package found`,
+            title: "No package found",
         };
     }
 
@@ -57,7 +53,7 @@ export default function Page({ params }: Readonly<{ params: { repo: string; pkg:
             <div className="flex flex-col gap-12 ">
                 <div className="flex flex-col justify-items-center">
                     <div className="items-center justify-items-center text-2xl text-rp-moon-iris">
-                        <Link href={`/`}>&#8592; Go back</Link>
+                        <Link href={"/"}>&#8592; Go back</Link>
                     </div>
                 </div>
                 <div className="flex gap-4 flex-col border-rp-moon-subtle">

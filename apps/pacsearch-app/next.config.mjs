@@ -16,7 +16,7 @@ const nextConfig = {
                 hostname: "pacsearch-assets.b68.dev",
                 port: "",
                 pathname: "/*",
-            }
+            },
         ],
     },
 };

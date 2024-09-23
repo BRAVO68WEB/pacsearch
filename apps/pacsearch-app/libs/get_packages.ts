@@ -1,7 +1,8 @@
 "use server";
 
-import { query } from "@/helpers/ApolloClient";
 import { gql } from "@apollo/client";
+
+import { query } from "@/helpers/ApolloClient";
 
 export interface IMiniPkgInfoData {
     name: string;
@@ -35,24 +36,24 @@ const getRepoPackages = async (
                 data: IRepoPkgsData;
             } = await query({
                 query: gql`
-                    query getPksByRepoName($pkgName: String, $limit: Int, $offset: Int) @cached {
-                        packages(
-                            where: { name: { _iregex: $pkgName } }
-                            limit: $limit
-                            order_by: { name: asc }
-                            offset: $offset
-                        ) {
-                            name
-                            version
-                            description
-                            repo
-                        }
-                        packages_aggregate(where: { name: { _iregex: $pkgName } }) {
-                            aggregate {
-                                count
-                            }
-                        }
-                    }
+                  query getPksByRepoName($pkgName: String, $limit: Int, $offset: Int) @cached {
+                      packages(
+                          where: { name: { _iregex: $pkgName } }
+                          limit: $limit
+                          order_by: { name: asc }
+                          offset: $offset
+                      ) {
+                          name
+                          version
+                          description
+                          repo
+                      }
+                      packages_aggregate(where: { name: { _iregex: $pkgName } }) {
+                          aggregate {
+                              count
+                          }
+                      }
+                  }
                 `,
                 variables: {
                     pkgName: pkgName,
@@ -68,19 +69,19 @@ const getRepoPackages = async (
                 data: IRepoPkgsData;
             } = await query({
                 query: gql`
-                    query getPksByRepoName($limit: Int, $offset: Int) @cached {
-                        packages(limit: $limit, order_by: { name: asc }, offset: $offset) {
-                            name
-                            version
-                            description
-                            repo
-                        }
-                        packages_aggregate {
-                            aggregate {
-                                count
-                            }
-                        }
-                    }
+                  query getPksByRepoName($limit: Int, $offset: Int) @cached {
+                      packages(limit: $limit, order_by: { name: asc }, offset: $offset) {
+                          name
+                          version
+                          description
+                          repo
+                      }
+                      packages_aggregate {
+                          aggregate {
+                              count
+                          }
+                      }
+                  }
                 `,
                 variables: {
                     limit: options.perPage,
@@ -97,31 +98,31 @@ const getRepoPackages = async (
             data: IRepoPkgsData;
         } = await query({
             query: gql`
-                query getPksByRepoName(
-                    $repo_name: String
-                    $pkgName: String
-                    $limit: Int
-                    $offset: Int
-                ) @cached {
-                    packages(
-                        where: { repo: { _eq: $repo_name }, name: { _iregex: $pkgName } }
-                        limit: $limit
-                        order_by: { name: asc }
-                        offset: $offset
-                    ) {
-                        name
-                        version
-                        description
-                        repo
-                    }
-                    packages_aggregate(
-                        where: { repo: { _eq: $repo_name }, name: { _iregex: $pkgName } }
-                    ) {
-                        aggregate {
-                            count
-                        }
-                    }
-                }
+              query getPksByRepoName(
+                  $repo_name: String
+                  $pkgName: String
+                  $limit: Int
+                  $offset: Int
+              ) @cached {
+                  packages(
+                      where: { repo: { _eq: $repo_name }, name: { _iregex: $pkgName } }
+                      limit: $limit
+                      order_by: { name: asc }
+                      offset: $offset
+                  ) {
+                      name
+                      version
+                      description
+                      repo
+                  }
+                  packages_aggregate(
+                      where: { repo: { _eq: $repo_name }, name: { _iregex: $pkgName } }
+                  ) {
+                      aggregate {
+                          count
+                      }
+                  }
+              }
             `,
             variables: {
                 repo_name: repo,
@@ -138,24 +139,24 @@ const getRepoPackages = async (
             data: IRepoPkgsData;
         } = await query({
             query: gql`
-                query getPksByRepoName($repo_name: String, $limit: Int, $offset: Int) @cached {
-                    packages(
-                        where: { repo: { _eq: $repo_name } }
-                        limit: $limit
-                        order_by: { name: asc }
-                        offset: $offset
-                    ) {
-                        name
-                        version
-                        description
-                        repo
-                    }
-                    packages_aggregate(where: { repo: { _eq: $repo_name } }) {
-                        aggregate {
-                            count
-                        }
-                    }
-                }
+              query getPksByRepoName($repo_name: String, $limit: Int, $offset: Int) @cached {
+                  packages(
+                      where: { repo: { _eq: $repo_name } }
+                      limit: $limit
+                      order_by: { name: asc }
+                      offset: $offset
+                  ) {
+                      name
+                      version
+                      description
+                      repo
+                  }
+                  packages_aggregate(where: { repo: { _eq: $repo_name } }) {
+                      aggregate {
+                          count
+                      }
+                  }
+              }
             `,
             variables: {
                 repo_name: repo,

@@ -1,7 +1,8 @@
 "use client";
 
-import getRepoPackages, { IMiniPkgInfoData, IRepoPkgsData } from "@/libs/get_packages";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+
+import getRepoPackages, { IMiniPkgInfoData, IRepoPkgsData } from "@/libs/get_packages";
 
 interface IRepoNameContextType {
     name: string | null;
@@ -55,25 +56,24 @@ function NameContext({ pkgData: _pkgData, children }: Readonly<NameContextProps>
         fetchData();
     }, [name, searchPkgName, perPage, pageNumber]);
 
-    const contextValue = useMemo(() => ({
-        name,
-        setName,
-        searchPkgName,
-        setSearchPkgName,
-        perPage,
-        setPerPage,
-        pageNumber,
-        setPageNumber,
-        totalPackages,
-        setTotalPackages,
-        packages: pkgData.packages,
-    }), [name, searchPkgName, perPage, pageNumber, totalPackages, pkgData.packages]);
-
-    return (
-        <repoNameContext.Provider value={contextValue}>
-            {children}
-        </repoNameContext.Provider>
+    const contextValue = useMemo(
+        () => ({
+            name,
+            setName,
+            searchPkgName,
+            setSearchPkgName,
+            perPage,
+            setPerPage,
+            pageNumber,
+            setPageNumber,
+            totalPackages,
+            setTotalPackages,
+            packages: pkgData.packages,
+        }),
+        [name, searchPkgName, perPage, pageNumber, totalPackages, pkgData.packages],
     );
+
+    return <repoNameContext.Provider value={contextValue}>{children}</repoNameContext.Provider>;
 }
 
 export default NameContext;
