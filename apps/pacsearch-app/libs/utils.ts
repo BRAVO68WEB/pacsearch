@@ -6,7 +6,6 @@ export const cn = (...inputs: ClassValue[]) => {
 };
 
 export const calcSize = (size: string) => {
-    console.log(size);
     if (size === "NULL") return "0 B";
 
     let sizeInBytes = Number.parseInt(size);

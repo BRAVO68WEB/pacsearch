@@ -55,7 +55,7 @@ export function PacSearch({
                     <Search className="w-6 h-6 mr-2 text-white-400" />
                     <h1 className="text-2xl 2xl:text-3xl font-bold text-purple-400">Pac-Search</h1>
                     <a
-                        href="https://github.com/pac-search/pac-search"
+                        href="https://github.com/BRAVO68WEB/pacsearch"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white-400 hover:text-white-600 transition-colors ml-8"
