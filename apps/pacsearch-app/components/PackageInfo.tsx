@@ -2,7 +2,7 @@ import React from "react";
 
 import getPackageInfo from "@/libs/get_package_info";
 
-import { PackageInfoCard } from "./package-info-card";
+import { PackageInfoCard } from "./PackageInfoCard";
 
 async function PackageInfo({ pkgName, repoName }: Readonly<{ pkgName: string; repoName: string }>) {
     const data = await getPackageInfo({
