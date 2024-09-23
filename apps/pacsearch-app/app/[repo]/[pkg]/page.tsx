@@ -1,6 +1,5 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 
-import NameContext from "@/components/NameContext";
 import PackageInfo from "@/components/PackageInfo";
 
 import getPkgsInfo from "@/libs/get_package_info";
@@ -16,7 +15,6 @@ type Props = {
 
 export async function generateMetadata(
     { params }: Props,
-    parent: ResolvingMetadata,
 ): Promise<Metadata> {
     const pkg = params.pkg;
     const repo = params.repo;

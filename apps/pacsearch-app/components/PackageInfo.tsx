@@ -7,7 +7,13 @@ async function PackageInfo({ pkgName, repoName }: Readonly<{ pkgName: string; re
         pkgName,
         repoName,
     });
-    return <PackageInfoCard props={data.packages[0]} />;
+    return (
+        <div className="flex justify-center">
+            <div className="w-full max-w-screen-md">
+                <PackageInfoCard props={data.packages[0]} />
+            </div>
+        </div>
+    );
 }
 
 export default PackageInfo;

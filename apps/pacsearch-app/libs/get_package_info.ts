@@ -5,13 +5,13 @@ export interface IPkgInfo {
     arch: string;
     base: string;
     build_date: string;
-    compressed_size: number;
+    compressed_size: string;
     conflicts: string;
     description: string;
     file_name: string;
     groups: string;
     home_url: string;
-    installed_size: number;
+    installed_size: string;
     license: string;
     md5_sum: string;
     name: string;

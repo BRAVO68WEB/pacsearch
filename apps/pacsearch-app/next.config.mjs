@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    experimental: {
+        reactCompiler: true,
+    },
     images: {
         remotePatterns: [
             {
@@ -8,6 +11,12 @@ const nextConfig = {
                 port: "",
                 pathname: "/u/*",
             },
+            {
+                protocol: "https",
+                hostname: "pacsearch-assets.b68.dev",
+                port: "",
+                pathname: "/*",
+            }
         ],
     },
 };

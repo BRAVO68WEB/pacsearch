@@ -3,8 +3,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, Download } from "lucide-react"
 import { IPkgInfo } from "@/libs/get_package_info"
+
+import { calcSize } from "@/libs/utils"
 
 export function PackageInfoCard({
   props
@@ -40,7 +42,16 @@ export function PackageInfoCard({
         </div>
         <Separator className="bg-slate-700" />
         <div className="grid gap-2">
-          <InfoItem label="File Name" value={props.file_name} />
+          <InfoItem label="File Name" value={
+            <a
+              href={props.download_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-blue-400 hover:underline"
+            >
+              {props.file_name} <Download className="ml-1 h-3 w-3" />
+            </a>
+          } />
           <InfoItem
             label="Home URL"
             value={
@@ -59,8 +70,8 @@ export function PackageInfoCard({
         </div>
         <Separator className="bg-slate-700" />
         <div className="grid grid-cols-2 gap-4">
-          <InfoItem label="Installed Size" value={props.installed_size} />
-          <InfoItem label="Compressed Size" value={props.compressed_size} />
+          <InfoItem label="Installed Size" value={calcSize(props.installed_size)} />
+          <InfoItem label="Compressed Size" value={calcSize(props.compressed_size)} />
         </div>
         <Separator className="bg-slate-700" />
         <InfoItem

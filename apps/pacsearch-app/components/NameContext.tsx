@@ -1,7 +1,7 @@
 "use client";
 
 import getRepoPackages, { IMiniPkgInfoData, IRepoPkgsData } from "@/libs/get_packages";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 interface IRepoNameContextType {
     name: string | null;
@@ -40,37 +40,37 @@ function NameContext({ pkgData: _pkgData, children }: Readonly<NameContextProps>
     const [perPage, setPerPage] = useState<number>(25);
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [totalPackages, setTotalPackages] = useState<number>(0);
-    const [pkgData, setPkgDate] = useState<IRepoPkgsData>(_pkgData);
-    console.log(perPage, pageNumber);
+    const [pkgData, setPkgData] = useState<IRepoPkgsData>(_pkgData);
+
     useEffect(() => {
-        if (!name) {
-            setPkgDate(_pkgData);
-            return;
-        }
-        getRepoPackages(name, null, {
-            perPage: perPage,
-            pageNumber: pageNumber,
-        }).then(pkg => {
-            setPkgDate(pkg);
-        });
-    }, [name, _pkgData, pageNumber, perPage]);
+        const fetchData = async () => {
+            const data = await getRepoPackages(name, searchPkgName, {
+                perPage,
+                pageNumber,
+            });
+            setPkgData(data);
+            setTotalPackages(data.packages_aggregate.aggregate.count);
+        };
+
+        fetchData();
+    }, [name, searchPkgName, perPage, pageNumber]);
+
+    const contextValue = useMemo(() => ({
+        name,
+        setName,
+        searchPkgName,
+        setSearchPkgName,
+        perPage,
+        setPerPage,
+        pageNumber,
+        setPageNumber,
+        totalPackages,
+        setTotalPackages,
+        packages: pkgData.packages,
+    }), [name, searchPkgName, perPage, pageNumber, totalPackages, pkgData.packages]);
 
     return (
-        <repoNameContext.Provider
-            value={{
-                name,
-                setName,
-                searchPkgName,
-                setSearchPkgName,
-                perPage,
-                setPerPage,
-                pageNumber,
-                setPageNumber,
-                totalPackages,
-                setTotalPackages,
-                packages: pkgData.packages,
-            }}
-        >
+        <repoNameContext.Provider value={contextValue}>
             {children}
         </repoNameContext.Provider>
     );

@@ -9,7 +9,7 @@ export default function useDebounce(callback: (t: string) => Promise<void> | voi
         const t = setTimeout(() => {
             callback(txt);
             timeout = null;
-        }, 500);
+        }, 100);
         timeout = t;
     };
 }

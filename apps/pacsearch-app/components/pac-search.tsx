@@ -20,21 +20,14 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Search, Github, FileText, ArrowLeft, ArrowRight } from "lucide-react";
 import { IRepoData } from "@/libs/get_repos";
-import { IMiniPkgInfoData } from "@/libs/get_packages";
 import Link from "next/link";
 import { useRepoName } from "./NameContext";
+import useDebounce from "@/libs/debounce";
 
 export function PacSearch({
     repos,
-    setRepos,
-    // packages,
 }: Readonly<{
     repos: IRepoData[];
-    setRepos: React.Dispatch<React.SetStateAction<IRepoData[]>>;
-    setSelectedRepo: React.Dispatch<React.SetStateAction<string>>;
-    // packages: IMiniPkgInfoData[];
-    perPage: number;
-    setPerPage: React.Dispatch<React.SetStateAction<number>>;
 }>) {
     const {
         name,
@@ -49,14 +42,24 @@ export function PacSearch({
         packages,
     } = useRepoName();
 
-    const totalPages = Math.ceil(totalPackages / perPage);
+    const search = useDebounce(async (input: string) => {
+        setSearchPkgName(input);
+    });
 
     return (
         <div className="flex h-screen bg-gray-900 text-gray-100">
             <aside className="w-64 2xl:w-80 bg-gray-800 p-4 pr-0">
                 <div className="flex items-center mb-6">
-                    <Search className="w-6 h-6 mr-2 text-purple-400" />
+                    <Search className="w-6 h-6 mr-2 text-white-400" />
                     <h1 className="text-2xl 2xl:text-3xl font-bold text-purple-400">Pac-Search</h1>
+                    <a
+                        href="https://github.com/pac-search/pac-search"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white-400 hover:text-white-600 transition-colors ml-8"
+                    >
+                        <Github className="w-6 h-6" />
+                    </a>
                 </div>
                 <nav>
                     <h2 className="text-lg font-semibold mb-2 2xl:text-xl">Repo List</h2>
@@ -78,6 +81,15 @@ export function PacSearch({
                                 {repo.name}
                             </Button>
                         ))}
+                        <Button
+                            variant="outline" 
+                            className="w-full justify-start mb-1 2xl:text-lg"
+                            onClick={() => {
+                                window.open("https://github.com/BRAVO68WEB/pacsearch/issues/new?title=[REQUEST]%20Add%20a%20missing%20AUR%20Repo&labels=request&assignees=BRAVO68WEB")
+                            }}
+                        >
+                            Missing Repo?
+                        </Button>
                     </ScrollArea>
                 </nav>
             </aside>
@@ -88,7 +100,7 @@ export function PacSearch({
                             className="w-full pl-10 bg-gray-700 border-gray-600 "
                             placeholder="Search for a package"
                             value={searchPkgName ?? ""}
-                            onChange={e => setSearchPkgName(e.target.value)}
+                            onChange={e => search(e.target.value)}
                         />
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                     </div>
@@ -126,7 +138,7 @@ export function PacSearch({
                     </TableHeader>
                     <TableBody className="text-lg 2xl:text-xl">
                         {packages.map(pkg => (
-                            <TableRow key={pkg.name}>
+                            <TableRow key={pkg.name + "-" +pkg.repo}>
                                 <TableCell>
                                     <Link
                                         href={`/${pkg.repo}/${pkg.name}`}
@@ -147,6 +159,9 @@ export function PacSearch({
                         Showing {pageNumber * perPage - perPage + 1} to{" "}
                         {Math.min(pageNumber * perPage, totalPackages)} of {totalPackages} packages
                     </div>
+                    <div className="text-sm text-gray-400">
+                        Made with ❤️ by <a href="https://github.com/BRAVO68WEB">BRAVO68WEB</a>
+                    </div>
                     <div className="flex items-center space-x-2">
                         <Button
                             variant="outline"
@@ -160,8 +175,6 @@ export function PacSearch({
                         </Button>
                         <div className="text-sm">
                             Page <span className="font-medium">{pageNumber}</span>
-                            {/* of{" "} */}
-                            {/* <span className="font-medium">{totalPages}</span> */}
                         </div>
                         <Button
                             variant="outline"
