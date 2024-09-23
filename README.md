@@ -1,5 +1,7 @@
 <p align="center">
   <img src="https://pacsearch-assets.b68.dev/og-image.png" />
+  <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fpacsearch.vercel.app%2Fapi%2Fpkg&query=count&style=for-the-badge&logo=Hasura&logoColor=green&label=Total%20Packages%20Count">
+  <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fpacsearch.vercel.app%2Fapi%2Frepo&query=count&style=for-the-badge&logo=Hasura&logoColor=green&label=Total%20Repos%20Count">
 </p>
 
 # PacSearch
