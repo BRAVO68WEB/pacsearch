@@ -1,6 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+
+import getRepoPackages, { IMiniPkgInfoData, IRepoPkgsData } from "@/libs/get_packages";
 
 interface IRepoNameContextType {
     name: string | null;
@@ -13,6 +15,7 @@ interface IRepoNameContextType {
     setPageNumber: (pageNumber: number) => void;
     totalPackages: number;
     setTotalPackages: (totalPackages: number) => void;
+    packages: IMiniPkgInfoData[];
 }
 const repoNameContext = createContext<IRepoNameContextType>({
     name: null,
@@ -25,36 +28,52 @@ const repoNameContext = createContext<IRepoNameContextType>({
     setPerPage: () => {},
     totalPackages: 0,
     setTotalPackages: () => {},
+    packages: [],
 });
 
 interface NameContextProps {
     children: React.ReactNode;
+    pkgData: IRepoPkgsData;
 }
-function NameContext({ children }: Readonly<NameContextProps>) {
+function NameContext({ pkgData: _pkgData, children }: Readonly<NameContextProps>) {
     const [name, setName] = useState<string | null>(null);
     const [searchPkgName, setSearchPkgName] = useState<string | null>(null);
     const [perPage, setPerPage] = useState<number>(25);
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [totalPackages, setTotalPackages] = useState<number>(0);
+    const [pkgData, setPkgData] = useState<IRepoPkgsData>(_pkgData);
 
-    return (
-        <repoNameContext.Provider
-            value={{
-                name,
-                setName,
-                searchPkgName,
-                setSearchPkgName,
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getRepoPackages(name, searchPkgName, {
                 perPage,
-                setPerPage,
                 pageNumber,
-                setPageNumber,
-                totalPackages,
-                setTotalPackages,
-            }}
-        >
-            {children}
-        </repoNameContext.Provider>
+            });
+            setPkgData(data);
+            setTotalPackages(data.packages_aggregate.aggregate.count);
+        };
+
+        fetchData();
+    }, [name, searchPkgName, perPage, pageNumber]);
+
+    const contextValue = useMemo(
+        () => ({
+            name,
+            setName,
+            searchPkgName,
+            setSearchPkgName,
+            perPage,
+            setPerPage,
+            pageNumber,
+            setPageNumber,
+            totalPackages,
+            setTotalPackages,
+            packages: pkgData.packages,
+        }),
+        [name, searchPkgName, perPage, pageNumber, totalPackages, pkgData.packages],
     );
+
+    return <repoNameContext.Provider value={contextValue}>{children}</repoNameContext.Provider>;
 }
 
 export default NameContext;

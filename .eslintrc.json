@@ -1,0 +1,6 @@
+{
+    "extends": "@bravo68web/eslint-config",
+    "rules": {
+        "unicorn/filename-case": "off"
+    }
+}

@@ -17,7 +17,7 @@
     {
         "name": "chaotic-aur",
         "root_url": "https://geo-mirror.chaotic.cx/chaotic-aur/x86_64/",
-        "url": "https://mirror.nag.albony.in/chaotic-aur/chaotic-aur/x86_64/chaotic-aur.db.tar.zst"
+        "url": "https://builds.garudalinux.org/repos/chaotic-aur/x86_64/chaotic-aur.db.tar.zst"
     },
     {
         "name": "blackarch",

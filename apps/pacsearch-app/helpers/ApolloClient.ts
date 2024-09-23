@@ -1,8 +1,8 @@
 import { HttpLink } from "@apollo/client";
 import {
-    registerApolloClient,
     ApolloClient,
     InMemoryCache,
+    registerApolloClient,
 } from "@apollo/experimental-nextjs-app-support";
 
 export const { getClient, query, PreloadQuery } = registerApolloClient(() => {

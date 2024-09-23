@@ -1,11 +1,8 @@
-import type { Metadata, ResolvingMetadata } from "next";
-
-import NameContext from "@/components/NameContext";
-import PackageInfo from "@/components/PackageInfo";
-
-import getPkgsInfo from "@/libs/get_package_info";
-
+import type { Metadata } from "next";
 import Link from "next/link";
+
+import PackageInfo from "@/components/PackageInfo";
+import getPkgsInfo from "@/libs/get_package_info";
 
 type Props = {
     params: {
@@ -14,10 +11,7 @@ type Props = {
     };
 };
 
-export async function generateMetadata(
-    { params }: Props,
-    parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const pkg = params.pkg;
     const repo = params.repo;
 
@@ -25,7 +19,7 @@ export async function generateMetadata(
 
     if (!pkgData.packages[0]) {
         return {
-            title: `No package found`,
+            title: "No package found",
         };
     }
 
@@ -55,19 +49,17 @@ export async function generateMetadata(
 
 export default function Page({ params }: Readonly<{ params: { repo: string; pkg: string } }>) {
     return (
-        <NameContext>
-            <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
-                <div className="flex flex-col gap-16 ">
-                    <div className="flex flex-col justify-items-center">
-                        <div className="items-center justify-items-center text-2xl pt-2 text-rp-moon-iris">
-                            <Link href={`/`}>&#8592; Go back</Link>
-                        </div>
-                    </div>
-                    <div className="flex gap-4 flex-col border-rp-moon-subtle border-2">
-                        <PackageInfo repoName={params.repo} pkgName={params.pkg} />
+        <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20 sm:pt-8">
+            <div className="flex flex-col gap-12 ">
+                <div className="flex flex-col justify-items-center">
+                    <div className="items-center justify-items-center text-2xl text-rp-moon-iris">
+                        <Link href={"/"}>&#8592; Go back</Link>
                     </div>
                 </div>
+                <div className="flex gap-4 flex-col border-rp-moon-subtle">
+                    <PackageInfo repoName={params.repo} pkgName={params.pkg} />
+                </div>
             </div>
-        </NameContext>
+        </div>
     );
 }
