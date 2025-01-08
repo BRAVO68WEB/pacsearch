@@ -14,31 +14,31 @@ Search packages for Arch Linux throughout multiple AUR Repositories
 
 ## WorkFlow Status 🚀
 
-| Name | Status |
-|----------------|---------|
-| Push Workflow Status | ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/BRAVO68WEB/pacsearch/test-run.yml?style=for-the-badge&logo=github) |
+| Name                          | Status                                                                                                                                                     |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Push Workflow Status          | ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/BRAVO68WEB/pacsearch/test-run.yml?style=for-the-badge&logo=github) |
 | Periodic Sync Workflow Status | ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/BRAVO68WEB/pacsearch/sync-run.yml?style=for-the-badge&logo=github) |
 
 ## Project Structure 🎁
 
 ### App 🎂
 
-| Name | Version | Link                          |
-|----------------|---------|---------------------|
-| pacsearch-app  | 0.2.0   | [Open](./apps/pacsearch-app/) |
+| Name          | Version | Link                          |
+| ------------- | ------- | ----------------------------- |
+| pacsearch-app | 0.2.0   | [Open](./apps/pacsearch-app/) |
 
 ### Package / Crates 🍰
 
-| Name | Version | Link                          |
-|----------------|---------|---------------------|
+| Name                  | Version | Link                                      |
+| --------------------- | ------- | ----------------------------------------- |
 | archlinux-repo-parser | 0.1.0   | [Open](./packages/archlinux-repo-parser/) |
-| aurparser | 0.1.0   | [Open](./packages/aurparser/) |
-| dbgen | 0.1.0   | [Open](./packages/dbgen/) |
-| repoparser | 0.1.0   | [Open](./packages/repoparser/) |
+| aurparser             | 0.1.0   | [Open](./packages/aurparser/)             |
+| dbgen                 | 0.1.0   | [Open](./packages/dbgen/)                 |
+| repoparser            | 0.1.0   | [Open](./packages/repoparser/)            |
 
 ### AUR Repositories ✨
 
-- [Repo Config](./config/repo.json)
+-   [Repo Config](./config/repo.json)
 
 ### LiCENSE 📜
 

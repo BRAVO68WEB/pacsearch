@@ -17,11 +17,11 @@ const getDataRepo = async () => {
         data: IRepoListData;
     } = await query({
         query: gql`
-          query {
-              repos(order_by: { name: asc }) {
-                  name
-              }
-          }
+            query {
+                repos(order_by: { name: asc }) {
+                    name
+                }
+            }
         `,
     });
 

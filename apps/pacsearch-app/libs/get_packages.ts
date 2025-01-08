@@ -38,7 +38,20 @@ const getRepoPackages = async (
                 query: gql`
                   query getPksByRepoName($pkgName: String, $limit: Int, $offset: Int) @cached {
                       packages(
-                          where: { name: { _iregex: $pkgName } }
+                          where: {
+                              _or: [
+                                  { name: { _ilike: $pkgName } }
+                                  { description: { _ilike: $pkgName } }
+                                  { md5_sum: { _ilike: $pkgName } }
+                                  { sha256_sum: { _ilike: $pkgName } }
+                                  { base: { _ilike: $pkgName } }
+                                  { packager: { _ilike: $pkgName } }
+                                  { pgp_signature: { _ilike: $pkgName } }
+                                  { home_url: { _ilike: $pkgName } }
+                                  { conflicts: { _ilike: $pkgName } }
+                                  { groups: { _ilike: $pkgName } }
+                              ]
+                          }
                           limit: $limit
                           order_by: { name: asc }
                           offset: $offset
@@ -48,7 +61,22 @@ const getRepoPackages = async (
                           description
                           repo
                       }
-                      packages_aggregate(where: { name: { _iregex: $pkgName } }) {
+                      packages_aggregate(
+                          where: {
+                              _or: [
+                                  { name: { _ilike: $pkgName } }
+                                  { description: { _ilike: $pkgName } }
+                                  { md5_sum: { _ilike: $pkgName } }
+                                  { sha256_sum: { _ilike: $pkgName } }
+                                  { base: { _ilike: $pkgName } }
+                                  { packager: { _ilike: $pkgName } }
+                                  { pgp_signature: { _ilike: $pkgName } }
+                                  { home_url: { _ilike: $pkgName } }
+                                  { conflicts: { _ilike: $pkgName } }
+                                  { groups: { _ilike: $pkgName } }
+                              ]
+                          }
+                      ) {
                           aggregate {
                               count
                           }
@@ -56,7 +84,7 @@ const getRepoPackages = async (
                   }
                 `,
                 variables: {
-                    pkgName: pkgName,
+                    pkgName: `%${pkgName}%`,
                     limit: options.perPage,
                     offset: (options.pageNumber - 1) * options.perPage,
                 },
@@ -105,7 +133,21 @@ const getRepoPackages = async (
                   $offset: Int
               ) @cached {
                   packages(
-                      where: { repo: { _eq: $repo_name }, name: { _iregex: $pkgName } }
+                      where: {
+                          repo: { _eq: $repo_name }
+                          _or: [
+                              { name: { _ilike: $pkgName } }
+                              { description: { _ilike: $pkgName } }
+                              { md5_sum: { _ilike: $pkgName } }
+                              { sha256_sum: { _ilike: $pkgName } }
+                              { base: { _ilike: $pkgName } }
+                              { packager: { _ilike: $pkgName } }
+                              { pgp_signature: { _ilike: $pkgName } }
+                              { home_url: { _ilike: $pkgName } }
+                              { conflicts: { _ilike: $pkgName } }
+                              { groups: { _ilike: $pkgName } }
+                          ]
+                      }
                       limit: $limit
                       order_by: { name: asc }
                       offset: $offset
@@ -116,7 +158,21 @@ const getRepoPackages = async (
                       repo
                   }
                   packages_aggregate(
-                      where: { repo: { _eq: $repo_name }, name: { _iregex: $pkgName } }
+                      where: {
+                          repo: { _eq: $repo_name }
+                          _or: [
+                              { name: { _ilike: $pkgName } }
+                              { description: { _ilike: $pkgName } }
+                              { md5_sum: { _ilike: $pkgName } }
+                              { sha256_sum: { _ilike: $pkgName } }
+                              { base: { _ilike: $pkgName } }
+                              { packager: { _ilike: $pkgName } }
+                              { pgp_signature: { _ilike: $pkgName } }
+                              { home_url: { _ilike: $pkgName } }
+                              { conflicts: { _ilike: $pkgName } }
+                              { groups: { _ilike: $pkgName } }
+                          ]
+                      }
                   ) {
                       aggregate {
                           count

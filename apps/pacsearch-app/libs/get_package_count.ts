@@ -17,13 +17,13 @@ export const getPkgCount = async () => {
         data: IPkgCount;
     } = await query({
         query: gql`
-          query {
-            packages_aggregate {
-                aggregate {
-                    count
+            query {
+                packages_aggregate {
+                    aggregate {
+                        count
+                    }
                 }
             }
-          }
         `,
     });
 
@@ -45,13 +45,13 @@ export const getRepoCount = async () => {
         data: IRepoCount;
     } = await query({
         query: gql`
-          query {
-            repos_aggregate {
-                aggregate {
-                    count
+            query {
+                repos_aggregate {
+                    aggregate {
+                        count
+                    }
                 }
             }
-          }
         `,
     });
 

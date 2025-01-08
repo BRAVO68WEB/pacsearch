@@ -1,6 +1,6 @@
 "use client";
 
-import { Download,ExternalLink } from "lucide-react";
+import { Download, ExternalLink } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
