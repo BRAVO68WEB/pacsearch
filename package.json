@@ -2,11 +2,7 @@
     "name": "pacsearch",
     "version": "0.0.0",
     "license": "MIT",
-    "author": {
-        "name": "BRAVO68WEB",
-        "email": "hi@b68.dev",
-        "url": "https://b68.dev"
-    },
+    "author": "BRAVO68WEB <hi@b68.dev> (https://b68.dev)",
     "scripts": {
         "build": "turbo build",
         "dev": "turbo dev",
